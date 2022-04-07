@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="shopSQL">
+	<!-- 전체 목록 -->
+	<select id="getShopList" parameterType="java.util.Map" resultType="shop">
+		SELECT ROWNUM rn, pt.* FROM
+		    (SELECT  p.*, price.price AS todaysPrice
+		    FROM (SELECT productId, price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD'))price
+		        , product_table p
+		    WHERE price.productId = p.productId
+		    ORDER BY p.productId DESC)pt
+	</select>
+	
+	<select id="getWishStyleCount" parameterType="java.util.Map" resultType="shop">
+		SELECT ps.*, w.wishListCount FROM
+		    (SELECT p.productId, s.styleCount FROM
+		        (SELECT productId FROM product_table)p
+		            FULL OUTER JOIN
+		                (SELECT productId, COUNT(*) AS styleCount FROM style_board GROUP BY productId)s
+		            ON p.productId = s.productId
+		    ORDER BY productId DESC)ps
+		    FULL OUTER JOIN
+		        (SELECT productId, COUNT(*) AS wishListCount FROM wish_list GROUP BY productId)w
+		    ON ps.productId = w.productId
+		ORDER BY ps.productId DESC
+	</select>
+	
+	<!-- 한개 가져오기 --> 
+	<select id="getShop" parameterType="int" resultType="shop">
+		SELECT p.*
+		    ,(SELECT COUNT(*) FROM style_board WHERE productId = #{productId}) AS styleCount
+		    ,(SELECT COUNT(*) FROM wish_list WHERE productId = #{productId}) AS wishListCount
+		    ,(SELECT price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD') AND productId = #{productId}) AS todaysPrice
+		FROM product_table p
+		WHERE p.productId = #{productId}
+	</select>
+	
+	<!-- 총글수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM product_table
+	</select> 
+	
+	<!-- 브랜드 필터 -->
+	<select id="getBrandList" resultType="String">
+		SELECT DISTINCT brandName FROM product_table
+	</select>
+	
+
+	
+	<!-- 이 아래부턴 새로 추가된 쿼리문 -->
+	<!-- 특정 상품 wish 여부 -->
+	<select id="getWishOnOff" parameterType="java.util.Map" resultType="WishListDTO">
+		select * from wish_list where userId=#{userId} and productId=#{productId} 
+	</select>
+	
+	<!-- 상품id로 해당 상품의 최저가 찾기 -->
+	<select id="getLowestPriceByProductId" parameterType="Integer" resultType="Integer">
+		select price from (select rownum rn, total.* from (select * from sales_table where productId=#{productId} and status=0 order by price asc)total) where rn=1
+	</select>
+	
+	<!-- 필터, 정렬 조건에 따른 리스트 리턴 -->
+	<select id="getShopDTOList" parameterType="java.util.Map" resultType="shop">
+		select *
+			from(
+			select 
+			    totalTB.productId, totalTB.exportdate , totalTB.productSize, totalTB.productName, totalTB.productNameKor, totalTB.modelId, totalTB.releaseprice, totalTB.img1, totalTB.brandname, totalTB.productcollection, totalTB.releasedate,
+	            totalTB.lowest,
+	            totalTB.highest,
+	            totalTB.todaysPrice,
+	            totalTB.popular,
+	            row_number() over(partition by productid order by productsize desc) as rn
+			from 
+			    (select 
+			            p.productId, s.exportdate , s.productSize, p.productName, p.productNameKor, p.modelId, p.releaseprice, p.img1, p.brandname, p.productcollection, p.releasedate,
+			            price_low as lowest,
+			            NVL(highestprice_product.price_high, 0) as highest,
+			            floor(price_table.price) as todaysPrice,
+			            popular_product.popularity as popular
+			        from 
+			            stock_table s
+			            left outer join 
+			                product_table p
+			            on s.productid = p.productid     
+			            left outer join 
+			                lowestprice_product
+			            on  s.productId = lowestprice_product.productid
+			            left outer join
+			                popular_product
+			            on s.productId = popular_product.productid 
+			            left outer join
+			                price_table
+			            on s.productId = price_table.productId
+			            left join 
+			                highestprice_product
+			            on s.productid = highestprice_product.productid) totalTB
+			where 1=1
+			<if test="brand != null and brand.size!=0"> <!-- 필터 -->
+				and brandname in 
+				<foreach collection="brand" item='brandname' index='i' open="(" close=")" separator=",">
+					#{brandname}
+				</foreach>
+			</if>
+			<if test="size != null and size.size!=0"> <!-- 필터 -->
+				and productSize in 
+				<foreach collection="size" item='size' index='i' open="(" close=")" separator=",">
+					#{size}
+				</foreach>
+			</if>
+			<if test="priceMin != null">
+				and lowest between #{priceMin} and #{priceMax}			
+			</if>
+			
+			order by <!-- 정렬 --> 
+			<if test="sort == 'lowest'">
+				lowest asc)
+			</if>
+			<if test="sort != 'lowest'">
+				${sort} desc)
+			</if>
+			where exportDate is null and rn=1
+	</select>
+	
+	
+	
+	<insert id="insertSalesData" parameterType="java.util.Map">
+		<!-- salesId, userId, productId, price, status, productSize, regDate -->
+		INSERT INTO sales_table VALUES(seq_sales_table.NEXTVAL
+									   , #{userId}
+									   , #{productId}
+									   , #{price}
+									   , #{status}
+									   , #{productSize}
+									   , #{addressId}
+									   , sysdate)
+	</insert>
+	
+	<insert id="insertPurchaseData" parameterType="java.util.Map">
+		<!-- purchaseId, userId, productId, status, productSize, regDate -->
+		INSERT INTO purchase_table VALUES(seq_purchase_table.NEXTVAL
+									   , #{userId}
+									   , #{productId}
+									   , #{paymentId}
+									   , #{status}
+									   , #{addressId}
+									   , #{productSize}
+									   , sysdate)
+	</insert>
+	
+	<select id="getRecentlyAddedPurchaseId" resultType="int">
+		SELECT 
+		        LAST_NUMBER-1
+		FROM 
+		        USER_SEQUENCES 
+		WHERE 
+		        SEQUENCE_NAME = 'SEQ_PURCHASE_TABLE'
+	</select>
+	
+	<insert id="insertDealData" parameterType="java.util.Map">
+		INSERT INTO deal_table VALUES(seq_deal_table.NEXTVAL
+									   , #{purchaseId}
+									   , #{salesId}
+									   , #{checkId}
+									   , #{deliveryId}
+									   , sysdate)
+	</insert>
+	
+	<insert id="insertPaymentData" parameterType="java.util.Map">
+		INSERT INTO payment_table VALUES(seq_payment_table.NEXTVAL
+									   , #{paymentMethod}
+									   , #{bank}
+									   , null
+									   , #{accountHolder}
+									   , #{price}
+									   , sysdate)
+	</insert>
+	
+	<select id="getRecentlyAddedPaymentId" resultType="int">
+		SELECT 
+		        LAST_NUMBER-1
+		FROM 
+		        USER_SEQUENCES 
+		WHERE 
+		        SEQUENCE_NAME = 'SEQ_PAYMENT_TABLE'
+	</select>
+	
+	<insert id="insertOrderData" parameterType="java.util.Map">
+		INSERT INTO order_table VALUES(seq_order_table.NEXTVAL
+									   , #{userId}
+									   , #{paymentId}
+									   , #{stockId}
+									   , #{deliveryId}
+									   , #{addressId}
+									   , sysdate
+									   , #{phoneNum})
+	</insert>	
+	
+	<insert id="insertCheckData" parameterType="java.util.Map">
+		INSERT INTO check_table VALUES(seq_check_table.NEXTVAL
+									   , #{productId}
+									   , #{salesId}
+									   , #{checkState}
+									   , #{checkResult})
+	</insert>
+	
+	<select id="getRecentlyAddedCheckId" resultType="int">
+		SELECT 
+		        LAST_NUMBER-1
+		FROM 
+		        USER_SEQUENCES 
+		WHERE 
+		        SEQUENCE_NAME = 'SEQ_CHECK_TABLE'
+	</select>
+	
+	<update id="updateSalesStatus" parameterType="java.util.Map">
+		UPDATE sales_table SET status = #{status} WHERE salesId = #{salesId}
+	</update>
+	
+	<select id="getRecentlyAddedSalesId" resultType="int">
+		SELECT 
+		        LAST_NUMBER-1
+		FROM 
+		        USER_SEQUENCES 
+		WHERE 
+		        SEQUENCE_NAME = 'SEQ_SALES_TABLE'
+	</select>
+	
+	<insert id="insertAdminPurchaseData" parameterType="java.util.Map">
+		<!-- purchaseId, userId, productId, status, productSize, regDate -->
+		INSERT INTO purchase_table VALUES(seq_purchase_table.NEXTVAL
+									   , #{userId}
+									   , #{productId}
+									   , #{paymentId}
+									   , #{status}
+									   , #{addressId}
+									   , #{productSize}
+									   , sysdate)
+	</insert>
+	
+	<update id="updatePurchaseStatus" parameterType="java.util.Map">
+		UPDATE purchase_table SET status = #{status} WHERE purchaseId = #{purchaseId}
+	</update>
+</mapper>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userSQL">
+	<!-- 전체 목록 -->
+	<select id="getUserForm" parameterType="java.util.Map" resultType="user">
+	SELECT * FROM
+			(SELECT ROWNUM rn, tt.* FROM
+			(SELECT * FROM user_table  
+			        ORDER BY userId DESC)tt
+					)WHERE rn BETWEEN #{startNum} AND #{endNum}	</select>
+	
+	<!-- 관리자 사용자 조회 -->
+	<select id="getAdminUserId" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE userId = #{userId}
+	</select>
+
+	<!-- 사용자 -->
+	<select id="getUserId" parameterType="int" resultType="user">
+		SELECT * FROM user_table WHERE userId = #{userId}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="joinOk" parameterType="user">
+		INSERT INTO user_table(userId, username, pwd, fullName, email, phoneNum, lastDate, regDate)
+						VALUES(seq_user_table.nextval, #{username}, #{pwd}, #{fullName}, #{email}, #{phoneNum}, sysdate, sysdate)
+	</insert>
+	
+	<!-- 소셜 회원가입 -->
+	<insert id="joinSocialOk" parameterType="user">
+		INSERT INTO user_table(userId, email, username, phoneNum, fullName, img, accessToken, platformType, lastDate, regDate)
+						VALUES(seq_user_table.nextval, #{email}, #{username}, #{phoneNum}, #{fullName}, #{img}, #{accessToken}, '카카오', sysdate, sysdate)
+	</insert>
+	
+	<!-- 로그인 -->
+	<update id="loginOk" parameterType="String">
+		UPDATE user_table SET lastDate=sysdate WHERE username=#{username}
+	</update>
+	
+	<!-- 소셜 로그인 -->
+	<update id="kakaoLoginOk" parameterType="String">
+		UPDATE user_table SET lastDate=sysdate WHERE email=#{email}
+	</update>
+	
+	<!-- 아이디 확인 -->
+	<select id="chkUsername" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE username=#{username}
+	</select>
+	
+	<!-- 이메일 확인 -->
+	<select id="chkEmail" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE email=#{email}
+	</select>
+	
+	<!-- 휴대폰 번호 확인 -->
+	<select id="chkPhoneNum" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE phoneNum=#{phoneNum}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUserOk" parameterType="String" resultType="String">
+		SELECT username FROM user_table WHERE phoneNum=#{phoneNum}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwdOk" parameterType="java.util.Map" resultType="user">
+		SELECT * FROM user_table WHERE phoneNum=#{phoneNum} and username=#{username}
+	</select>
+
+	<!-- 비밀번호 수정 -->
+	<update id="updatePwd" parameterType="java.util.Map">
+		UPDATE user_table SET pwd=#{newPwd} WHERE username=#{username}
+	</update>
+	
+	<!-- 아이디 변경 -->
+	<update id="updateUsername" parameterType="user">
+		UPDATE user_table SET username=#{username} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 이메일 주소 변경 -->
+	<update id="updateEmail" parameterType="user">
+		UPDATE user_table SET email=#{email} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 이름 변경 -->
+	<update id="updateFullName" parameterType="user">
+		UPDATE user_table SET fullName=#{fullName} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 휴대폰 번호 변경 -->
+	<update id="updatePhoneNum" parameterType="user">
+		UPDATE user_table SET phoneNum=#{phoneNum} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 프로필 이미지 변경 -->
+	<update id="updateImg" parameterType="java.util.Map">
+		UPDATE user_table SET img=#{img} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<update id="withdrawal" parameterType="int">
+		UPDATE user_table SET auth='5' where userId=#{userId}
+	</update>
+	
+	<!-- 프로필 소개 변경 -->
+	<update id="updateIntroMsg" parameterType="java.util.Map">
+		UPDATE user_table SET introMsg=#{introMsg} WHERE userId=#{userId}
+	</update>
+	
+	<!--관리자 등급 변경-->
+	<update id="ratingChange" parameterType="java.util.Map">
+		UPDATE user_table SET auth = #{ratings} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 사용자 거래내역 조회-->
+	<select id="getTradeForm" parameterType="java.util.Map" resultType="user2">
+	
+		SELECT * FROM
+          (SELECT ROWNUM rn, o.* FROM
+            
+              (select o.orderId, o.stockId, o.orderDate, 
+                s.productId AS stockProductId,
+                p1.price AS pricePrice,  
+                p.productId AS purchaseProductId, p2.purchaseId, p2.status AS purchaseStatus, p.regDate+30 AS purchaseDueDate,
+                p.productName,                       
+                s1.salesId, s.productId AS salesProductId, s1.status AS salesStatus, s1.price AS salesPrice, s1.regDate+30 AS salesDueDate,
+                p.productName AS productProductName  
+                  
+              from order_table o,
+                   stock_table s,
+                   product_table p,
+                   price_table p1,                              
+                   purchase_table p2,
+                   sales_table s1        
+					
+       
+              where o.stockId = s.stockId
+                and s.productId = p.productId
+                and P.productId = p1.productId
+                and p2.productId= p.productId                
+         	    and s1.productId= p.productId
+         		                 
+              ORDER BY orderId desc)o)
+	      WHERE rn BETWEEN #{startNum} AND #{endNum}
+	</select>
+	 <!-- 유저 페이징 토탈 -->
+    <select id="getTotalUser" resultType="int">
+      select count(*) from user_table
+    </select>
+    
+     <!-- 유저 검색 페이징--><!-- 대소문자 안가리게 만들기 UPPER('Black') 예시 바꾸기!-->
+    <select id="getSearchTotalUser" parameterType="java.util.Map"  resultType="int">
+    	select count (*) from
+			(select rownum rn, tt.* from
+				(select userId, email, userName 
+					from user_table 
+				where (${searchOption} like '%' || 
+					#{inputWord} || '%')
+				order by userId desc)tt ) 
+    </select>
+    
+  
+    <!-- 관리자 회원관리 검색 -->
+    <select id="searchUser" parameterType="java.util.Map" resultType="user">
+	  <![CDATA[
+				
+	select * from 
+	      (select rownum rn, tt.* from
+			(select userId, email, userName
+				from user_table
+	      where (${searchOption} like '%' || #{inputWord} || '%')
+		  order by userId desc)tt)
+		  where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+    </select>
+	
+</mapper> 

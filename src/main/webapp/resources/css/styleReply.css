@@ -1,0 +1,185 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.show-reply {
+  padding: 0px 20px;
+}
+.reply-title {
+  padding: 20px 0px;
+  display: flex;
+}
+
+.reply-title_title {
+  padding: 0px;
+  margin: 0px;
+}
+.reply-title i {
+  box-sizing: border-box;
+  padding-top: 6px;
+  padding-right: 4px;
+}
+
+.reply-user_box {
+  display: flex;
+
+  width: 280px;
+  height: 280px;
+  font-size: 12px;
+  overflow: auto;
+}
+
+.reply-content_box {
+  display: block;
+  margin-left: 6px;
+}
+
+.reply-writer_id {
+  font-weight: 700;
+  margin-right: 3px;
+}
+
+.reply-userimg {
+  margin-right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.reply-uresimg_real {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.reply-sub {
+  display: flex;
+  padding-top: 3px;
+  padding-bottom: 15px;
+}
+
+.reply-content {
+  display: block;
+}
+
+.reply-sub {
+  color: rgb(110, 110, 110);
+  font-size: 11px;
+}
+.dot {
+  box-sizing: border-box;
+  margin: 0px 3px;
+}
+
+/*add-reply*/
+.add-reply {
+  box-sizing: border-box;
+  max-width: 300px;
+  padding: 10px 18px;
+  display: flex;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  border-top: 5px solid rgb(241, 241, 241);
+}
+
+.add-reply_img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.add-reply_img_box {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.add-reply_div {
+  padding: 4px 66px 6px 8px;
+  background-color: #fafafa;
+  border-radius: 18px;
+  border: 1px solid #ebebeb;
+}
+
+.add-reply_input {
+  border: none;
+  font-size: 12px;
+  z-index: 9999;
+  outline: none;
+}
+
+.add-reply_input::placeholder {
+  color: rgb(199, 199, 199);
+}
+
+/*댓글창*/
+
+.comment-statebox {
+  display: flex;
+}
+.comment-like_button {
+  margin-left: auto;
+}
+
+.comment-userimg {
+  box-sizing: border-box;
+
+  width: 30px;
+  height: 30px;
+}
+
+.comment-userimg-real {
+  width: auto;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.comment-text {
+  font-size: 12px;
+
+  box-sizing: border-box;
+
+  max-width: 96%;
+  display: block;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.comment-user_id {
+  font-weight: 700;
+}
+.comment-statebox_info {
+  display: flex;
+  font-size: 12px;
+}
+.comment-uspanload_time {
+  color: rgb(165, 165, 165);
+  font-weight: 100;
+  font-size: 8px;
+}
+
+.comment-state_info {
+  margin-left: 10px;
+}
+
+.comment-like_button {
+  margin-top: 8px;
+}
+.comment-statebox {
+  box-sizing: border-box;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+  padding: 8px 15px;
+
+  overflow: auto;
+}
+
+.show-comment {
+  padding: 0px 25px 20px 39px;
+  cursor: pointer;
+  font-size: 12px;
+  color: rgb(155, 155, 155);
+}
+
+/*댓글창*/

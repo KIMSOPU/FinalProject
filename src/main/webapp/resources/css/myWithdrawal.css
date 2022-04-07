@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+li, ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h6 {
+	margin: 0;
+}
+
+.content_area {
+	overflow: hidden;
+    min-height: 380px;
+    padding-top: 40px;
+}
+
+.withdrawal_terms {
+	margin-top: 20px;
+    padding: 24px;
+    border: 1px solid #d3d3d3;
+}
+
+.terms_box+.terms_box {
+	margin-top: 20px;
+}
+
+.terms_item {
+	position: relative;
+	padding-left: 15px;
+    color: #333;
+    word-break: keep-all;
+    font-size: 15px;
+    letter-spacing: -.15px;
+}
+
+.terms_item:before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: #222;
+}
+
+.checkbox_item {
+	position: relative;
+    font-size: 0;
+    padding-bottom: 15px;
+}
+
+.label_txt {
+	padding-left: 8px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -.07px;
+    vertical-align: top;
+    letter-spacing: -.16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.terms_detail {
+	padding-bottom: 16px;
+}
+
+.terms_subtitle {
+	font-size: 15px;
+    letter-spacing: -.15px;
+	padding: 8px;
+    font-weight: 600;
+}
+
+.terms_list {
+	padding-left: 10px;
+}
+
+.terms_item+.terms_item {
+    margin-top: 8px;
+}
+
+.withdrawal_check {
+	margin: 20px;
+}
+
+.withdrawal_btn_box {
+    text-align: center;
+}
+
+.withrawal_btn_box .btn {
+	width: 120px;
+}
+
+.btn {
+	display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+	background-color: #fff;
+    padding: 0 18px;
+    height: 42px;
+    line-height: 40px;
+    border-radius: 12px;
+    font-size: 14px;
+    letter-spacing: -.14px;
+}
+
+.withdrawal_btn {
+	color: #222;
+}
+
+.cancel_btn {
+	font-weight: 600;
+    color: #fff;
+    background-color: #222;
+    margin-left: 8px;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+	-webkit-appearance: none;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:hover {
+    border-color: rgba(170, 170, 170, 0.5);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+/* 모달 */
+.layer_withdrawal {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34,34,34,.5);
+    z-index: 1010;
+}
+
+.layer_withdrawal .layer_container {
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+    width: auto;
+    min-width: 360px;
+}
+
+.layer_withdrawal .layer_header {
+	text-align: center;
+}
+
+.layer_withdrawal .layer_header .title {
+	padding-top: 40px;
+    line-height: normal;
+    font-size: 20px;
+    letter-spacing: -.3px;
+}
+
+.layer_withdrawal .layer_content {
+	padding: 0 32px 40px;
+}
+
+.withdrawal_desc {
+	padding-top: 12px;
+    line-height: 19px;
+    font-size: 14px;
+    letter-spacing: -.21px;
+    color: rgba(34,34,34,.8);
+    text-align: center;
+}
+
+.layer_withdrawal .label_txt {
+	font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+}
+
+.withdrawal_btn_box {
+    padding-top: 24px!important;
+    text-align: center;
+    font-size: 0;
+}
+
+.link_withdrawal {
+	font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+    display: block;
+    margin-top: 8px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.layer_withdrawal .layer_close_btn {
+	position: absolute;
+    top: 18px;
+    right: 20px;
+    cursor: pointer;
+}

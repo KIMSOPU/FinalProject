@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+.help_success {
+	margin: 0 auto;
+    padding: 60px 0 160px;
+    width: 400px;
+}
+
+.help_title_success {
+	margin: 0;
+	padding-bottom: 40px;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: -.36px;
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+.success_notice {
+	padding-top: 10px;
+    text-align: center;
+}
+
+.success_notice_title {
+	font-size: 12px;
+    letter-spacing: -.06px;
+    color: rgba(34,34,34,.5);
+}
+
+.success_notice_txt {
+    font-size: 18px;
+    letter-spacing: -.09px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.success_btn_box {
+	display: flex;
+	padding-top: 50px;
+	text-align: center;
+}
+
+.btn {
+	outline: none;
+	border: none;
+	width: 100%;
+    height: 52px;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 600;
+    line-height: 50px;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#find_pwd_btn {
+    cursor: pointer;
+    text-align: center;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+}
+
+#login_btn {
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: #222;
+    margin-left: 8px;
+}
+
+

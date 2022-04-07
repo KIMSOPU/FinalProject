@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="styleSQL">
+	<!-- StyleBoardDTO List가져오기 (인기도 순) -->
+	<select id="getListOrderByPopularity" resultType="StyleCardDTO">
+		select *
+			from (select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 productImg
+				from style_board 
+					left join user_table
+						on style_board.userId = user_table.userid
+					left join product_table
+						on style_board.productId = product_table.productid) total_table
+		order by total_table.likeCount desc, total_table.replycount desc, total_table.styleId desc
+	</select>
+	
+	<!-- StyleBoardDTO List가져오기 (최신 순) -->
+	<select id="getListOrderByRecentDate" resultType="StyleCardDTO">
+		select *
+			from (select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 productImg
+				from style_board 
+					left join user_table
+						on style_board.userId = user_table.userid
+					left join product_table
+						on style_board.productId = product_table.productid
+		order by style_board.styleId desc) total_table
+		
+	</select>
+	
+	<!-- 유저 피드 StyleBoardDTO List가져오기 (최신 순) -->
+	<select id="getUserFeed" parameterType="String" resultType="StyleCardDTO">
+		select *
+			from (select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 productImg
+				from style_board 
+					left join user_table
+						on style_board.userId = user_table.userid
+					left join product_table
+						on style_board.productId = product_table.productid
+				order by style_board.styleId desc) total_table
+		where total_table.username =  #{username}
+	</select>
+	
+	<!-- 특정게시글 StyleBoardDTO 가져오기 (한 개) -->
+	<select id="getOneStyleCardDTO" parameterType="Integer" resultType="StyleCardDTO">
+		select * 
+		from style_board 
+			left join user_table
+				on style_board.userId = user_table.userid
+			left join product_table
+				on style_board.productId = product_table.productid
+		where style_board.styleId = #{styleId}
+	</select>
+	
+	<!-- StyleBoardDTO List가져오기 (특정 회원) -->
+	<select id="getMyList" parameterType="Integer" resultType="StyleBoardDTO">
+		select * from style_board where userId=#{userId} order by regdate desc
+	</select>
+	
+	<!-- 특정 회원의 게시물 갯수 -->
+	<select id="totalStyleCount" parameterType="Integer" resultType="Integer">
+		select count(*) from style_board where userId=#{userId}
+	</select>
+	
+	<!-- 특정 게시물 공감 갯수 -->
+	<select id="totalLike" parameterType="Integer" resultType="Integer">
+		select count(*) from style_like where styleId=#{styleId}
+	</select>
+	
+	<!-- 특정 게시물 공감 여부 -->
+	<select id="getLikeOnOff" parameterType="java.util.Map" resultType="StyleLikeDTO">
+		select * from style_like where styleId=#{styleId} and userId=#{userId}
+	</select>
+	
+	<!-- 특정 게시물 공감 추가 -->
+	<insert id="plusLike1" parameterType="java.util.Map">
+		insert into style_like(likeId, userId, styleId) values(SEQ_STYLE_LIKE.nextval, #{userId}, #{styleId})
+	</insert>
+	<update id="plusLike2" parameterType="Integer">
+		update style_board set likecount = likecount+1 where styleId=#{styleId}
+	</update>
+	
+	<!-- 특정 게시물 공감 취소 -->
+	<delete id="minusLike1" parameterType="java.util.Map">
+		delete from style_like where userId=#{userId} and styleId=#{styleId}
+	</delete>
+	<update id="minusLike2" parameterType="Integer">
+		update style_board set likecount = likecount-1 where styleId=#{styleId}
+	</update>
+	
+	<!-- 특정 게시물 댓글 갯수 -->
+	<select id="totalComment" parameterType="Integer" resultType="Integer">
+		select count(*) from style_reply where styleId=#{styleId}
+	</select>
+	
+	<!-- 특정 게시물을 작성한 유저 정보 -->
+	<select id="getUserByUserId" parameterType="Integer" resultType="user">
+		select * from user_table where userId=#{userId}
+	</select>
+	
+	<!-- 특정 게시물을 작성한 유저 정보 -->
+	<select id="getUserByUsername" parameterType="String" resultType="user">
+		select * from user_table where username=#{username}
+	</select>
+	
+	<!-- 특정 게시물을 작성한 유저 정보 -->
+	<select id="getUserIdByUsername" parameterType="String" resultType="int">
+		select userId from user_table where username=#{username}
+	</select>
+	
+	<!-- 상품id로 상품 찾기 -->
+	<select id="getProductByProductId" parameterType="Integer" resultType="product">
+		select * from product_table where productId=#{productId}
+	</select>
+	
+	<!-- 상품id로 해당 상품의 최저가 찾기 -->
+	<select id="getLowestPriceByProductId" parameterType="Integer" resultType="Integer">
+		select price from (select rownum rn, total.* from (select * from sales_table where productId=#{productId} and status=0 order by price asc)total) where rn=1
+	</select>
+	
+	<!-- 게시물의 댓글 리스트 -->
+	<select id="getReplyList" parameterType="Integer" resultType="StyleReplyDTO">
+		select style_reply.stylereplyid, user_table.img, user_table.username,  user_table.intromsg , style_reply.contents, style_reply.regDate
+		from style_reply   
+			left join user_table
+			on style_reply.userId = user_table.userId
+		where style_reply.styleId = #{styleId}
+		order by style_reply.stylereplyid desc
+	</select>
+	
+	<!-- 게시물의 공감 회원 리스트 -->
+	<select id="getLikeUserList" parameterType="Integer" resultType="StyleReplyDTO">
+		select user_table.username, user_table.img, user_table.intromsg 
+		from style_like 
+			join user_table
+			on style_like.userId = user_table.userId
+		where styleId=#{styleId}
+	</select>
+	
+	<!-- 게시물 작성 (추가) -->
+	<insert id="styleWrite" parameterType="StyleBoardDTO">
+		INSERT INTO style_board(styleId, userId, productId, contents, reportCount, img1, regDate) 
+		values (seq_style_board.nextval, #{userId}, #{productId}, #{contents}, 0, #{img1}, sysdate) 
+	</insert>	
+	
+	<!-- 게시물 수정 -->
+	<update id="styleModify" parameterType="java.util.Map">
+		update style_board set contents=#{contents} where styleId=#{styleId} 
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="styleDelete" parameterType="Integer">
+		delete from style_board where styleId=#{styleId}
+	</delete>
+	
+	<!-- 게시물 신고 -->
+	<update id="addReport" parameterType="Integer">
+		update style_board set reportCount=reportCount+1 where styleId=#{styleId}
+	</update>
+	
+	<!-- 댓글 한개 가져오기 -->
+	<select id="getReplyOne" parameterType="Integer" resultType="StyleReplyDTO">
+		select style_reply.stylereplyid, user_table.img, user_table.username,  user_table.intromsg , style_reply.contents, style_reply.regDate
+		from style_reply   
+			left join user_table
+			on style_reply.userId = user_table.userId
+		where style_reply.stylereplyid = #{styleReplyId}
+	</select>
+	
+	<!-- 댓글 작성 (추가) -->
+	<insert id="replyWrite" parameterType="java.util.Map">
+		<selectKey keyProperty="styleReplyId" resultType="int" order="AFTER"> 	
+			SELECT seq_style_reply.CURRVAL from DUAL
+        </selectKey>	
+		INSERT INTO style_reply(styleReplyId, styleId, userId, contents, reportCount, regDate) 
+		values (seq_style_reply.nextval, #{styleId}, #{userId}, #{contents}, 0, sysdate) 
+	</insert>
+	<update id="replyWrite2" parameterType="Integer">
+		update style_board set replyCount = replyCount+1 where styleId=#{styleId} 
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="replyModify" parameterType="java.util.Map">
+		update style_reply set contents = #{contents} where styleReplyId=#{styleReplyId} 
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="java.util.Map">
+		delete from style_reply where styleReplyId=#{styleReplyId}
+	</delete>
+	<update id="replyDelete2" parameterType="Integer">
+		update style_board set replyCount = replyCount-1 where styleId=#{styleId} 
+	</update>
+	
+	<!-- 특정 상품이 태그된 게시글 목록 가져오기 -->
+	<select id="getProductsFeed" parameterType="Integer" resultType="StyleCardDTO">
+		select *
+			from (select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 productImg
+				from style_board 
+					left join user_table
+						on style_board.userId = user_table.userid
+					left join product_table
+						on style_board.productId = product_table.productid
+				order by style_board.styleId desc) total_table
+		where total_table.productId =  #{productId}
+	</select>
+	
+	<!-- 특정 상품이 태그된 게시글 목록 4개만 가져오기 -->
+	<select id="getProductsFeedFour" parameterType="Integer" resultType="StyleCardDTO">
+		select 
+		    b.*
+		from
+		    (select 
+		        rownum as rn, a.*
+		    from (select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 productImg
+		            from style_board 
+		                left join user_table
+		                    on style_board.userId = user_table.userid
+		                left join product_table
+		                    on style_board.productId = product_table.productid
+		            where style_board.productId = #{productId}
+		            order by style_board.styleId desc) a) b
+		where b.rn between 1 and 4
+	</select>
+	
+	<!-- 관리자 페이지 스타일 게시글 리스트 -->
+	<select id="getStyleList" parameterType="java.util.Map" resultType="StyleBoardDTO">
+		<if test='option.equals("all")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from style_board 
+			        order by styleId desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("standby")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from style_board where reportCount >= 5
+			        order by reportCount desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+	</select>
+		
+	<!-- 관리자 페이지 스타일 게시판 페이징 처리 -->
+	<select id="getTotalStyle" parameterType="String" resultType="Integer" >
+		<if test='option.equals("all")'>
+			select count(*) from style_board
+		</if>
+		<if test='option.equals("standby")'>
+			select count(*) from style_board where reportCount >= 5
+		</if>
+	</select>
+	
+	<!-- 관리자 스타일 검색결과 -->
+	<select id="searchStyleList" parameterType="java.util.Map" resultType="StyleBoardDTO">
+	   	<if test='option.equals("all")'>
+		   	<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from style_board 
+			        
+			        where ${searchOption} like '%' || #{inputWord} || '%'	
+			        
+			        
+			        order by styleId desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("standby")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from style_board 
+			
+			
+				where reportCount >= 5 and ${searchOption} like '%' || #{inputWord} || '%'	
+				
+				
+			        order by reportCount desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+	</select>
+	
+	<!-- 관리자 페이지 스타일 게시판 페이징 처리 -->
+	<select id="getTotalSearchStyle" parameterType="java.util.Map" resultType="Integer" >
+		select count(*) from style_board where ${searchOption} like '%' || #{inputWord} || '%'
+	</select>
+	
+	<!-- 관리자 페이지 게시물 삭제 -->
+	<delete id="deleteStyle" parameterType="Integer">
+		delete from style_board where styleId=#{styleId}
+	</delete>
+</mapper>

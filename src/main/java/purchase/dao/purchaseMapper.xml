@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="purchaseSQL">
+	<!-- 전체 목록 -->
+	<select id="getPurchaseList" parameterType="java.util.Map" resultType="purchase">
+		SELECT * 
+		FROM
+		    (SELECT ROWNUM rn, tt.* FROM
+		        (SELECT p1.*, d.salesId, s.price FROM purchase_table p1
+		            LEFT JOIN
+                        deal_table d
+                    ON p1.purchaseId = d.purchaseId
+                    LEFT JOIN
+                        sales_table s
+                    ON d.salesId = s.salesId
+                ORDER BY p1.purchaseId DESC)tt)
+		WHERE rn BETWEEN #{startNum} AND #{endNum}
+	</select>
+
+
+	<!-- 총글수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM purchase_table
+	</select>
+	
+	<select id="getPurchaseSearchList" parameterType="java.util.Map" resultType="purchase">
+		SELECT * 
+		FROM
+		    (SELECT ROWNUM rn, tt.* FROM
+		        (SELECT p1.*, p2.price FROM purchase_table p1
+		            LEFT JOIN
+		              (SELECT * FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD'))p2
+		            ON p1.productId = p2.productId
+		         ORDER BY purchaseId DESC)tt)
+		WHERE ${searchOption} = #{keyword}
+
+		<if test='searchOption == "purchaseId"'>    
+			WHERE purchaseId =  #{keyword} 
+		</if>
+		<if test='searchOption == "productSize"'>    
+			WHERE productSize =  #{keyword} 
+		</if>
+
+	</select>
+	
+</mapper>

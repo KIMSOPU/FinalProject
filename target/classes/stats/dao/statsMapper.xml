@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statsSQL">
+	<select id="getPriceDataForShop" resultType="stats" parameterType="int">
+		SELECT * FROM
+		    (SELECT 
+		        productId, price, regDate FROM price_table 
+		    WHERE 
+		        TO_CHAR(regDate, 'YYYYMMDD') 
+		            BETWEEN TO_CHAR(sysdate-6, 'YYYYMMDD') AND TO_CHAR(sysdate, 'YYYYMMDD')
+		    ORDER BY regDate)
+		WHERE productId = #{productId}
+	</select>
+</mapper>

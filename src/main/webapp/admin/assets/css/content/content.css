@@ -1,0 +1,97 @@
+/*  페이징ㄴ*/
+[class*='PagingDiv']{
+	 text-align: center;
+	 margin-top: 10px;
+	 color: #9e9e9e;
+     cursor: pointer;
+     font-size: 17px;
+}
+
+[class*='PagingDiv'] span{
+	 margin: 0px 10px;
+	 display: inline;
+}
+
+#currentPaging {
+	color: #222;
+	font-weight: 700;
+	curser: pointer;
+}
+
+[class*='PagingDiv'] span:hover {
+    margin: 0px 10px;
+    text-decoration: underline;
+}
+
+/* 중앙정렬 */
+.col-md-9{
+	margin: auto;
+}
+
+/* 등록버튼 */
+[id*='WriteBtn']{
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
+    margin-left: 1000px;
+}
+
+/* div태그를 양쪽으로 놓기위한 방법  반응형 웹 */
+.list{
+	float: left;
+}
+
+.write{
+	float: right;
+}
+
+/* 내용 textarea */
+form textarea{
+	border: none;
+	resize: none;
+	outline: none;
+	width: 100%;
+    height: 200px;
+}
+
+/* 검색 */
+#searchDiv{
+	width: 400px;
+	margin: auto;	
+}
+
+#searchOption{
+	width: 20%;
+	margin-right: 10px;
+	border: 1px;
+	outline: 0;
+	background-color: rgba(222, 222, 222, 0.3);
+}
+
+/* 전체삭제 */
+#deleteAll{
+	float: left;
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
+}
+
+/* 수정, 삭제 */
+.linkA {
+	font-size: 14px;
+	color: black;
+}
+
+/* 필수입력사항 css */
+[id*='Div']{
+	margin-left: 15px;
+	color: red;
+	font-size: 0.8571em;
+	font-weight: bold;
+}

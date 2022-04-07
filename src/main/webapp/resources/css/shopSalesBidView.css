@@ -1,0 +1,441 @@
+/* 
+body {
+  padding-top: 13.112884834663626vh !important;
+} 
+*/
+
+.body{
+  margin: 0 20vw;
+}
+
+.shopDetail-top {
+  position: sticky;
+  padding: 1vh 0vw 2vh 0vw;
+  background-color: white;
+  
+}
+
+.shopDetail-top {
+  display: flex;
+  z-index: 100;
+  justify-content: space-between;
+}
+
+.shopDetail-top-product {
+  display: flex;
+}
+
+.shopDetail-top_Realimg {
+  width: 15vh;
+  height: auto;
+
+  background-color: rgb(235, 240, 245);
+  border-radius: 4px;
+}
+
+.shopDetail-product_text {
+    text-align: left;
+    padding-left: 1.5vw;
+}
+
+.product_name {
+    font-weight: 700px;
+	font-size: 1.2em;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.product_name_translate {
+    color: rgb(136, 136, 136);
+	font-size: 0.9em;
+    padding: 0px;
+    margin: 0px;
+}
+
+.shopDetail-content{
+	border-top: 1px solid rgba(151, 151, 151, 0.3);	
+	border-bottom: 1px solid rgba(151, 151, 151, 0.3);	
+}
+
+
+.shopDetail-content2, .shopDetail-content3{
+	border-bottom: 1px solid rgba(151, 151, 151, 0.3);	
+}
+
+/* 
+.continue-sell-button{
+	width: 100%;
+	height: 5vh;
+}
+ */
+.continue-sell-button {
+	margin-top: 2vh;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 52px;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    line-height: 50px;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    background-color: #222222;
+}
+
+.continue-sell-button:active{
+    /* color: #fff; */
+    background-color: rgba(34,34,34,.8); /* #222; */
+    /* background-color: aqua; */
+}
+
+
+.btn-sm{
+   	width: 80px;
+    height: 35px;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 0;
+    border-radius: 10px;
+    margin: 0;
+}
+
+
+.product_modelId{
+	margin: 0;
+	font-size: 0.8em;
+}
+
+/* 모달 */
+.layer_container {
+    overflow: hidden;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+    z-index: 10000;
+}
+
+.layer_header {
+    text-align: center;
+}
+
+.save_btn_able {
+	background-color: #222222 !important;
+    cursor: pointer !important;
+}
+
+.layer {
+	 display: none; 
+}
+
+.delivery_bind {
+    padding: 0 32px;
+}
+
+.layer_btn {
+    text-align: center;
+    letter-spacing: -.06px;
+    line-height: 32px;
+    padding: 24px 32px 32px;
+}
+
+.layer_close_btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding-top: 1px;
+    padding-left: 14px;
+    padding-right: 12px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    height: 34px;
+    line-height: 32px;
+}
+
+.cancel_btn {
+    width: 120px;
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+}
+
+.save_btn {
+    margin-left: 8px;
+    width: 120px;
+    height: 34px;
+    display: inline-block;
+    background-color: #ebebeb;
+    color: #fff;
+    cursor: default;
+}
+
+.zipcode_btn {
+    position: absolute;
+    bottom: auto;
+    right: 0;
+    width: 55px;
+    height: 34px;
+    padding-top: 1px;
+    padding-left: 14px;
+    padding-right: 12px;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    font-size: 12px;
+    letter-spacing: -.06px;
+    line-height: 32px;
+}
+
+.checkbox_item {
+    align-items: center;
+    font-size: 14px;
+}
+
+label {
+    cursor: default;
+}
+
+.check_label {
+    display: inline-flex;
+    max-width: 100%;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:hover {
+    border-color: rgba(170, 170, 170, 0.5);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+.label_txt {
+    padding-left: 8px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    vertical-align: top;
+}
+
+.input_title {
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    margin: 0;
+}
+
+.input_txt {
+    padding: 15px 0 10px;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.input_txt:focus {
+	outline: 0;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
+}
+
+input, textarea {
+    padding: 0;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.input_err {
+    display: none;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+    margin: 3px;
+}
+
+#input_zipcode {
+    position: relative;
+    cursor: default;
+}
+
+#input_addr1 {
+	cursor: default;
+}
+
+.input_box {
+    position: relative;
+    padding-bottom: 15px;
+    margin-top: 8px;
+}
+
+.dropdown_btn {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50px;
+    right: 0;
+    margin-top: -12px;
+    line-height: 0;
+    
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.address_div, .registered_account_box{
+	display: flex;
+    justify-content: space-between;
+}
+
+.address_div h3, .registered_account_box p{
+	margin: 0;
+}
+
+.address_div {
+    margin: 1.5vh 0;
+}
+
+.view-address-btn{
+	margin-left: 5px;	
+}
+
+.registered_account_box {
+    margin-bottom: 1.5vh;
+    overflow: hidden;
+    margin-top: 21px;
+    padding: 15px 15px 16px;
+    border-radius: 10px;
+    background-color: #fafafa;
+    border: 1px solid #ebebeb;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+dl{
+    display: flex;
+    justify-content: space-between;
+}
+
+.registered_account_text{
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.layer_dropdown {
+	left: 0;
+    right: 0;
+    background-color: rgba(34,34,34,.5);
+    z-index: 1010;
+	
+	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;	
+    max-height: 240px;
+	display: none;
+	position: absolute;
+    top: auto;
+    bottom: auto;
+    border: 1px solid #ebebeb;
+    x-index: 10000;
+}
+
+.items_layer_container {
+    position: relative;
+    transform: none;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.items_layer_container ul, .items_layer_container il {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.drop_link {
+    position: relative;
+    display: block;
+    padding: 11px 50px 10px 16px;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.8);
+}
+
+#input_bank{
+	cursor: pointer;
+}
+
+.registered_account_change_text_div{
+	display: flex;
+	justify-content: space-between;
+}
+
+.registered_account_change_text3{
+	margin-left: 5px;
+}

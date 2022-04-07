@@ -1,0 +1,77 @@
+.style-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 2%;
+}
+
+.style_wrap {
+  position: relative;
+  display: flex !important;
+  justify-content: space-between;
+}
+.style-slick-div{
+    margin-bottom: 15vh;
+    padding: 20px 33px;
+}
+.style_wrap-imgbox {
+  position: relative;
+  background-color: gray;
+  /* width: 11.3vw !important; */
+  width: 203px;
+  height: 250px;
+  /* height: 15vw !important; */
+  border-radius: 8px;
+  margin: 0 9px;
+  cursor: pointer;
+}
+
+.slick-arrow.slick-hidden {
+  display: unset;
+}
+
+.style_wrap-img {	
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    border: 1px solid #fff;
+    transform: translate(10%, 10%);
+    height: 35px;
+    border-radius: 100%;
+    z-index: 100;
+}
+
+.item {
+  /* 슬라이드 되어야 할 아이템 */
+  width: calc(100% / 10);
+  height: 200px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.style-user-img, .style-user-profile-img{
+	object-fit: cover;
+    width: 100%;
+    height: 100%;
+	z-index: -100;
+	border-radius: 10px;
+}
+
+.style-user-profile-img {
+	border-radius: 100%;
+}
+
+.style-user-id{
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+}

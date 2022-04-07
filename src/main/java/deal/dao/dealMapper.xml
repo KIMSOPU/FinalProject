@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dealSQL">
+	<!-- 전체 목록 -->
+	<select id="getDealList" parameterType="java.util.Map" resultType="deal">
+		SELECT * FROM
+		    (SELECT ROWNUM rn, ft.* FROM
+		        (SELECT d.dealId, d.purchaseId, d.salesId, d.checkId, d.deliveryId, d.regDate AS dealRegDate,
+		               pt.userId AS purchaseUserId, ut2.username AS pUserName, pt.status AS purchaseStatus, pt.addressId AS purchaseAddressId, pt.regDate AS purchaseRegDate,
+		               st.userId AS salesUserId, ut.username, st.productId AS salesProductId, p.productName, st.price AS salesPrice, st.status as salesStatus, st.productSize, st.addressId AS salesAddressId, st.regDate AS salesRegDate,
+		               ct.checkState, ct.checkResult,
+		               dt.deliveryStatus, dt.trackingNum, dt.regDate AS deliveryRegDate
+		        FROM deal_table d
+		            LEFT JOIN
+		                (SELECT * FROM purchase_table)pt
+		            ON d.purchaseId = pt.purchaseId
+		            LEFT JOIN
+		                (SELECT * FROM sales_table)st
+		            ON d.salesId = st.salesId
+		            LEFT JOIN
+		                (SELECT * FROM check_table)ct
+		            ON d.checkId = ct.checkId
+		            LEFT JOIN
+		                (SELECT * FROM delivery_table)dt
+		            ON d.deliveryId = dt.deliveryId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut
+		            ON st.userId = ut.userId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut2
+		            ON pt.userId = ut2.userId
+		            LEFT JOIN
+		                (SELECT * FROM product_table)p
+		            ON st.productId = p.productId
+		            ORDER BY dealId DESC)ft)
+		WHERE rn BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<!-- 한개 가져오기 -->
+	<select id="getDeal" parameterType="int" resultType="deal">
+		SELECT d.dealId, d.purchaseId, d.salesId, d.checkId, d.deliveryId, d.regDate AS dealRegDate,
+		               pt.userId AS purchaseUserId, ut2.username AS pUserName, pt.status AS purchaseStatus, pt.addressId AS purchaseAddressId, pt.regDate AS purchaseRegDate,
+		               st.userId AS salesUserId, ut.username, st.productId AS salesProductId, p.productName, st.price AS salesPrice, st.status as salesStatus, st.productSize, st.addressId AS salesAddressId, st.regDate AS salesRegDate,
+		               ct.checkState, ct.checkResult,
+		               dt.deliveryStatus, dt.trackingNum, dt.regDate AS deliveryRegDate
+		        FROM deal_table d
+		            LEFT JOIN
+		                (SELECT * FROM purchase_table)pt
+		            ON d.purchaseId = pt.purchaseId
+		            LEFT JOIN
+		                (SELECT * FROM sales_table)st
+		            ON d.salesId = st.salesId
+		            LEFT JOIN
+		                (SELECT * FROM check_table)ct
+		            ON d.checkId = ct.checkId
+		            LEFT JOIN
+		                (SELECT * FROM delivery_table)dt
+		            ON d.deliveryId = dt.deliveryId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut
+		            ON st.userId = ut.userId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut2
+		            ON pt.userId = ut2.userId
+		            LEFT JOIN
+		                (SELECT * FROM product_table)p
+		            ON st.productId = p.productId
+                    WHERE dealId = #{dealId}
+		            ORDER BY dealId DESC
+	</select>
+	
+	<!-- 총글수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM deal_table
+	</select>
+	
+	<!-- 검색 -->
+	<select id="getDealSearchList" parameterType="java.util.Map" resultType="deal">
+		SELECT t.* FROM
+		    (SELECT ROWNUM rn, ft.* FROM
+		        (SELECT d.dealId, d.purchaseId, d.salesId, d.checkId, d.deliveryId, d.regDate AS dealRegDate,
+		               pt.userId AS purchaseUserId, ut2.username AS pUserName, pt.status AS purchaseStatus, pt.addressId AS purchaseAddressId, pt.regDate AS purchaseRegDate,
+		               st.userId AS salesUserId, ut.username, st.productId AS salesProductId, p.productName, st.price AS salesPrice, st.status as salesStatus, st.productSize, st.addressId AS salesAddressId, st.regDate AS salesRegDate,
+		               ct.checkState, ct.checkResult,
+		               dt.deliveryStatus, dt.trackingNum, dt.regDate AS deliveryRegDate
+		        FROM deal_table d
+		            LEFT JOIN
+		                (SELECT * FROM purchase_table)pt
+		            ON d.purchaseId = pt.purchaseId
+		            LEFT JOIN
+		                (SELECT * FROM sales_table)st
+		            ON d.salesId = st.salesId
+		            LEFT JOIN
+		                (SELECT * FROM check_table)ct
+		            ON d.checkId = ct.checkId
+		            LEFT JOIN
+		                (SELECT * FROM delivery_table)dt
+		            ON d.deliveryId = dt.deliveryId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut
+		            ON st.userId = ut.userId
+		            LEFT JOIN
+		                (SELECT * FROM user_table)ut2
+		            ON pt.userId = ut2.userId
+		            LEFT JOIN
+		                (SELECT * FROM product_table)p
+		            ON st.productId = p.productId
+		            ORDER BY dealId DESC)ft)t
+
+		    <if test='searchOption == "username"'>    
+				WHERE LOWER(username) LIKE '%' || LOWER(#{keyword}) || '%'
+				OR LOWER(pusername) LIKE '%' || LOWER(#{keyword}) || '%'
+			</if>
+			<if test='searchOption == "productName"'>    
+				WHERE LOWER(productName) LIKE '%' || LOWER(#{keyword}) || '%'
+			</if>
+			<if test='searchOption == "dealId"'>    
+				WHERE ${searchOption} =  #{keyword} 
+			</if>
+	</select>
+	
+	<select id="getTotalCountForSearch" resultType="int">
+		SELECT count(*) from
+		    (SELECT t.* FROM
+		        (SELECT ROWNUM rn, ft.* FROM
+		            (SELECT d.dealId, d.purchaseId, d.salesId, d.checkId, d.deliveryId, d.regDate AS dealRegDate,
+		                   pt.userId AS purchaseUserId, ut2.username AS pUserName, pt.status AS purchaseStatus, pt.addressId AS purchaseAddressId, pt.regDate AS purchaseRegDate,
+		                   st.userId AS salesUserId, ut.username, st.productId AS salesProductId, p.productName, st.price AS salesPrice, st.status as salesStatus, st.productSize, st.addressId AS salesAddressId, st.regDate AS salesRegDate,
+		                   ct.checkState, ct.checkResult,
+		                   dt.deliveryStatus, dt.trackingNum, dt.regDate AS deliveryRegDate
+		            FROM deal_table d
+		                LEFT JOIN
+		                    (SELECT * FROM purchase_table)pt
+		                ON d.purchaseId = pt.purchaseId
+		                LEFT JOIN
+		                    (SELECT * FROM sales_table)st
+		                ON d.salesId = st.salesId
+		                LEFT JOIN
+		                    (SELECT * FROM check_table)ct
+		                ON d.checkId = ct.checkId
+		                LEFT JOIN
+		                    (SELECT * FROM delivery_table)dt
+		                ON d.deliveryId = dt.deliveryId
+		                LEFT JOIN
+		                    (SELECT * FROM user_table)ut
+		                ON st.userId = ut.userId
+		                LEFT JOIN
+		                    (SELECT * FROM user_table)ut2
+		                ON pt.userId = ut2.userId
+		                LEFT JOIN
+		                    (SELECT * FROM product_table)p
+		                ON st.productId = p.productId
+		                ORDER BY dealId DESC)ft)t)
+
+		    <if test='searchOption == "username"'>    
+				WHERE LOWER(username) LIKE '%' || LOWER(#{keyword}) || '%'
+				OR LOWER(pusername) LIKE '%' || LOWER(#{keyword}) || '%'
+			</if>
+			<if test='searchOption == "productName"'>    
+				WHERE LOWER(productName) LIKE '%' || LOWER(#{keyword}) || '%'
+			</if>
+			<if test='searchOption == "dealId"'>    
+				WHERE ${searchOption} =  #{keyword} 
+			</if>
+				
+	</select>
+	
+	<insert id="insertDelivery" parameterType="java.util.Map">
+		INSERT INTO delivery_table VALUES(seq_delivery_table.nextval
+										  , #{deliveryStatus}
+										  , #{trackingNum}
+										  , sysdate)
+	</insert>
+	
+	<select id="getRecentlyAddedDeliveryId" resultType="int">
+		SELECT 
+		        LAST_NUMBER-1
+		FROM 
+		        USER_SEQUENCES 
+		WHERE 
+		        SEQUENCE_NAME = 'SEQ_DELIVERY_TABLE'
+	</select>
+	
+	<update id="updateDelivery" parameterType="java.util.Map" >
+		UPDATE delivery_table SET 
+									trackingNum = #{trackingNum}
+								  , deliveryStatus = #{deliveryStatus}
+		WHERE deliveryId = #{deliveryId}
+	</update>
+	
+</mapper>

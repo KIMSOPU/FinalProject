@@ -1,0 +1,78 @@
+
+.modal {
+	position: absolute;
+	z-index: 1100; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	display: none;
+	flex-direction: column;
+  align-items: center;
+  justify-content: center;
+            
+	background-color: rgba(34,34,34,.5);
+}
+
+.modal-window {
+	background-color: #fff;
+	border-radius: 30px !important;
+    position: relative;
+    text-align: center;
+	/* 모달창 사이즈는 각자 필요에 따라 클래스 추가해서 사용*/
+	width: 75vh;
+    height: 90vh; 
+}
+
+.modal-title {
+	padding: 15px 20px;
+}
+
+.modal-title h2 {
+	display: inline;
+}
+
+.close-area {
+	display: inline;
+	float: right;	
+}
+
+.modal-content {
+	max-height: 87%;
+	overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.chang-style {
+  box-sizing: border-box;
+  padding-bottom: 3vh;
+  margin: 3vh 0px;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.3);
+}
+
+.add-bold {
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.modal-footer{
+	/* background-color: salmon; */
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 5px 0;
+}
+
+.modal-footer input{
+	padding: 5px 10px;
+}
+
+.modal-content-price-div{
+	padding: 2vh 0;
+	
+}
+
+.modal-content-input-div input, select{
+	height: 3vh;
+}
+

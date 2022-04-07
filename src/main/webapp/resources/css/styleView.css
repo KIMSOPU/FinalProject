@@ -1,0 +1,532 @@
+.swal2-container {
+  z-index: 1000000;
+}
+
+.fa-message {
+  cursor: pointer;
+}
+.fa-heart {
+  color: red;
+}
+
+.delete {
+  cursor: pointer;
+  color: rgb(255, 87, 87);
+  font-weight: 100;
+  font-size: 8px;
+  margin-left: 4px;
+}
+
+.social-text {
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+* {
+  transition: all 0.5s;
+}
+.text-content {
+  margin-right: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow: hidden;
+}
+
+.styleViewBox {
+  margin-top: 10vw;
+}
+.hidden {
+  /* display: none; */
+  opacity: 0;
+}
+.add-reply_submit {
+  top: 4px;
+  font-size: 14px;
+  position: absolute;
+  right: 1vw;
+  font-weight: 700;
+  cursor: pointer;
+}
+.comment-statebox_info {
+  padding: 8px 15px;
+}
+
+.procut_wrap {
+  cursor: pointer;
+}
+
+.modal-hidden {
+  display: none;
+}
+
+.userCorr {
+  padding: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 20px;
+  color: rgb(88, 88, 88);
+}
+.want-margin {
+  width: 70vh;
+  padding: 30px;
+  margin-bottom: 2vw;
+  margin: auto;
+}
+
+.user-img {
+  width: 45px;
+  height: 45px;
+}
+
+.user-follow_button {
+  cursor: pointer;
+  display: flex;
+}
+.user-statebox {
+  margin-bottom: 8px;
+}
+.user-img_real {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+button {
+  border: none;
+  outline: none;
+  background-color: white;
+}
+
+.user-statebox_info {
+  cursor: pointer;
+  display: flex;
+}
+
+.user-statebox {
+  display: flex;
+}
+
+.user-follow_button {
+  margin-left: auto;
+}
+
+.user-state_info p {
+  font-size: 16px;
+  margin: 0px;
+}
+.user-state_info {
+  margin: 2px 0px 0px 8px;
+}
+.user_id {
+  font-weight: 600;
+}
+
+.user-upload_time {
+  color: rgb(133, 133, 133);
+  font-weight: 300;
+  letter-spacing: -0.33px;
+  font-size: 14px;
+}
+
+.follow_button_declaration {
+  background-color: #ff5050;
+  margin-right: 3px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 800;
+  color: White;
+  border-radius: 30%;
+  height: 27px;
+}
+.follow_button {
+  margin-right: 3px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 800;
+  background-color: #818181;
+  color: White;
+  border-radius: 30%;
+  height: 27px;
+}
+
+.user-follow_button {
+  cursor: pointer;
+}
+
+.img-box {
+  width: 100%;
+  height: auto;
+}
+
+.img-box_img {
+  width: 100%;
+  height: auto;
+}
+
+.procut_tag {
+  padding: 8px 0px;
+  font-size: 15px;
+  margin: 0px;
+}
+
+/*test*/
+
+/*test*/
+
+/*test*/
+
+.product {
+  width: 7vw;
+  height: 7vw;
+}
+
+.product_name {
+  font-size: 13px;
+  max-width: 110px;
+
+  margin: 6px 0px;
+  letter-spacing: -0.33px;
+
+  display: block;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.style_product-img {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background-color: rgb(246, 238, 237);
+}
+
+.price-box {
+  font-weight: 600;
+  margin-top: 0px;
+  font-size: 11px;
+}
+
+/*test*/
+
+/*test*/
+
+.product-svg_wrap {
+  padding: 8px 0px 3px 0px;
+  display: flex;
+  color: rgb(68, 68, 68);
+}
+.share {
+  margin-left: auto;
+  color: rgb(68, 68, 68);
+}
+
+.product-svg i {
+  cursor: pointer;
+  font-size: 23px;
+  margin-left: 4px;
+  margin-right: 14px;
+}
+
+.share i {
+  font-size: 23px;
+}
+
+.social-count {
+  padding: 1px 0px;
+  font-size: 15px;
+  margin: 0px;
+}
+
+.social-count p {
+  margin: 5px 0 15px 0;
+  cursor: pointer;
+}
+
+.comment-area {
+  padding: 5px 0px;
+  font-size: 15px;
+}
+
+.view-more {
+  box-sizing: border-box;
+  width: 40%;
+  cursor: pointer;
+  color: rgb(179, 179, 179);
+}
+
+.amount {
+  font-size: 13px;
+}
+.comment-like_button {
+  margin-left: auto;
+}
+
+.comment-userimg {
+  box-sizing: border-box;
+
+  width: 3.5vw;
+  height: 3.5vw;
+  cursor: pointer;
+}
+
+.comment-userimg-real {
+  width: auto;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.comment-text {
+  font-size: 14px;
+
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.comment-user_id {
+  font-weight: 700;
+}
+.comment-statebox_info {
+  display: flex;
+  font-size: 12px;
+}
+.comment-uspanload_time {
+  color: rgb(165, 165, 165);
+  font-weight: 100;
+  font-size: 8px;
+}
+
+.comment-state_info {
+  margin-left: 10px;
+}
+
+.comment-like_button {
+  margin-top: 8px;
+}
+
+.comment-hidden {
+  display: none;
+}
+
+/* 댓글 */
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.show-reply {
+  padding: 0px 20px;
+}
+.reply-title {
+  padding: 20px 0px;
+  display: flex;
+}
+
+.reply-title_title {
+  padding: 0px;
+  margin: 0px;
+}
+.reply-title i {
+  box-sizing: border-box;
+  padding-top: 6px;
+  padding-right: 4px;
+}
+
+.reply-writer_content {
+  font-size: 14px;
+}
+.reply-user_box {
+  display: flex;
+
+  height: 280px;
+  font-size: 12px;
+  overflow: auto;
+}
+
+.reply-content_box {
+  display: block;
+  margin-left: 6px;
+}
+
+.reply-writer_id {
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 3px;
+}
+
+.reply-userimg {
+  margin-right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.reply-uresimg_real {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.reply-sub {
+  display: flex;
+  padding-top: 3px;
+  padding-bottom: 15px;
+}
+
+.reply-content {
+  display: block;
+}
+
+.reply-sub {
+  color: rgb(110, 110, 110);
+  font-size: 11px;
+}
+.dot {
+  box-sizing: border-box;
+  margin: 0px 3px;
+}
+
+/*add-reply*/
+.add-reply {
+  box-sizing: border-box;
+  padding: 10px 18px;
+  display: flex;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  border-top: 5px solid rgb(241, 241, 241);
+}
+
+.add-reply_img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.add-reply_img_box {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.add-reply_div {
+  position: relative;
+  width: 100%;
+  padding: 4px 66px 6px 8px;
+  background-color: #fafafa;
+  border-radius: 18px;
+  border: 1px solid #ebebeb;
+}
+
+.add-reply_input {
+  width: 100%;
+  background: unset;
+  border: none;
+  font-size: 12px;
+  z-index: 9999;
+  outline: none;
+}
+
+.add-reply_input::placeholder {
+  color: rgb(199, 199, 199);
+}
+
+/*댓글창*/
+
+.comment-like_button {
+  margin-left: auto;
+}
+
+.comment-userimg {
+  box-sizing: border-box;
+
+  width: 30px;
+  height: 30px;
+}
+
+.comment-userimg-real {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.comment-like,
+.comment-like_count {
+  color: rgb(165, 165, 165);
+  font-weight: 100;
+  font-size: 8px;
+}
+
+.comment-user_id {
+  font-size: 14px;
+  font-weight: 700;
+}
+.comment-statebox_info {
+  display: flex;
+  font-size: 12px;
+}
+.comment-uspanload_time {
+  color: rgb(165, 165, 165);
+  font-weight: 100;
+  font-size: 8px;
+}
+
+.comment-state_info {
+  margin-left: 10px;
+}
+
+.comment-like_button {
+  margin-top: 8px;
+}
+.comment-statebox {
+  box-sizing: border-box;
+  height: 46%;
+  display: block;
+  overflow-y: auto;
+}
+.comment-innerBox {
+  display: flex;
+}
+.show-comment {
+  padding: 0px 25px 20px 39px;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgb(155, 155, 155);
+}
+
+.padding-box {
+  padding: 8px 15px;
+}
+
+.modal-bg {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+
+.big-reply-box {
+  box-shadow: -4px 0 9px 3px #00000029;
+
+  width: 35vw;
+  height: 100vh;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+/*댓글창*/
+
+.xbutton {
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+/*
+.style-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 2%;
+}
+
+.style_wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.style_wrap-imgbox {
+  position: relative;
+  background-color: gray;
+  width: 12vw;
+  height: 16vw;
+  border-radius: 8px;
+  margin: 3%;
+}
+
+.style_wrap-imgbox p {
+  position: absolute;
+  transform: translate(30%, 1300%);
+
+  color: rgb(209, 209, 209);
+}
+
+.style_wrap-img {
+  border: 3px solid white;
+  position: absolute;
+  transform: translate(10%, 10%);
+  background-color: rgb(194, 194, 194);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+*/

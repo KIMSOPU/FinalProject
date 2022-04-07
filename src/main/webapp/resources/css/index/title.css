@@ -1,0 +1,13 @@
+.product-title {
+    margin: 0px 60px;
+  }
+  
+  .product-realtitle {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .product-subtitle {
+    font-size: 14px;
+    color: rgb(161, 161, 161);
+  }

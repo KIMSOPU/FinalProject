@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stockSQL">
+
+	<!-- 전체 목록 -->
+	<select id="getStockForm" parameterType="java.util.Map" resultType="stock">
+		SELECT * FROM stock_table ORDER BY stockId DESC
+	</select>
+	
+	<select id="getStock" parameterType="int" resultType="stock">
+		SELECT * FROM stock_table WHERE stockId = #{stockId}
+	</select>
+	
+	<!-- 재고테이블에 사이즈 / 상품 번호 등록-->
+    <insert id="insertStock" parameterType="java.util.Map">
+    	insert into stock_table values (seq_stock_table.nextval, #{productId}, #{productSize}, null)
+    </insert>
+    
+   	<select id="selectStock" parameterType="java.util.Map" resultType="stock">
+   		select stockId from stock_table where productId=#{productId} and productSize=#{productSize}
+   	</select>
+   	
+   	<!-- 재고삭제 -->
+    <delete id="deleteStock" parameterType="int">
+    	delete from stock_table where stockId=#{stockId}
+    </delete>
+    
+    <select id="getStockListBySize" parameterType="java.util.Map" resultType="stock">
+		SELECT s.stockId, s.productId, s.productSize, s.exportDate
+		        , p.price
+		FROM stock_table s
+		    LEFT JOIN 
+		        (SELECT price, productId FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD') AND productId = #{productId})p
+		    ON s.productId = p.productId
+		WHERE s.productId = #{productId}
+		    AND s.productSize = #{userSize}
+		    AND s.exportDate IS NULL
+    </select>
+</mapper>

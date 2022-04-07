@@ -1,0 +1,25 @@
+body {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .head {
+  
+    display: flex;
+    justify-content: right;
+  }
+  .head__a {
+    font-size: 12px;
+    text-decoration: none;
+    margin-right: 0.4%;
+    padding: 1.4vh;
+    color: inherit;
+  }
+  
+  .head__a:active {
+    cursor: pointer;
+  }
+  .head__a:visited {
+    color: rgb(17, 17, 17);
+    
+  }

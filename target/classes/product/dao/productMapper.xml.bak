@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="productSQL">
+
+    <!-- 상품 목록 뽑기 --> 
+    <select id="getproductList" parameterType="java.util.Map" resultType="product">
+    <![CDATA[
+		select * from
+         (select rownum rn, tt.* from
+                  (select p.productId AS productId, p.brandName, p.productName, p.modelId, p.releasePrice, p.productNameKor, p.img1, p.img2, p.img3, p.productCollection, p.releaseDate, p.regDate AS regDate, p1.price AS todaysPrice
+                  from product_table p, price_table p1
+                  where p.productId = p1.productId and TO_CHAR(SYSDATE,'YY/MM/DD')=TO_CHAR(p1.regdate,'YY/MM/DD')
+                order by p.productId desc)tt) where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+    </select>
+    
+    <!-- 상품 페이징을 위한 총 글의 수 -->
+    <select id="getTotalProduct" resultType="int">
+     select count(*) from
+         (select rownum rn, tt.* from
+                  (select p.productId AS productId, p.brandName, p.productName, p.modelId, p.releasePrice, p.productNameKor, p.img1, p.img2, p.img3, p.productCollection, p.releaseDate, p.regDate AS regDate, p1.price AS todaysPrice
+                  from product_table p, price_table p1
+                  where p.productId = p1.productId and TO_CHAR(SYSDATE,'YY/MM/DD')=TO_CHAR(p1.regdate,'YY/MM/DD')
+                order by p.productId desc)tt)
+    </select>
+
+	<!-- 상품검색 목록 뽑기 -->
+    <select id="searchProduct" parameterType="java.util.Map" resultType="product">
+	  <![CDATA[
+		select * from
+			(select rownum rn, tt.* from
+           	 	(select p.productId AS productId, p.brandName, p.productName, p.modelId, p.releasePrice, p.productNameKor, p.img1, p.img2, p.img3, p.productCollection, p.releaseDate, p.regDate AS regDate, p1.price AS todaysPrice
+           		 from product_table p, price_table p1
+           		 where p.productId = p1.productId and TO_CHAR(SYSDATE,'YY/MM/DD')=TO_CHAR(p1.regdate,'YY/MM/DD') and (${searchOption} like '%' || #{inputWord} || '%')
+   				 order by p.productId desc)tt )
+ 		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+    </select>
+    
+    <!-- 상품 검색 페이징을 위한 총 글의 수 --><!-- 대소문자 안가리게 만들기 UPPER('Black') 예시 바꾸기!-->
+    <select id="getSearchTotalProduct" parameterType="java.util.Map"  resultType="int">
+		select count(*) from
+			(select rownum rn, tt.* from
+           	 	(select p.productId AS productId, p.brandName, p.productName, p.modelId, p.releasePrice, p.productNameKor, p.img1, p.img2, p.img3, p.productCollection, p.releaseDate, p.regDate AS regDate, p1.price AS todaysPrice
+           		 from product_table p, price_table p1
+           		 where p.productId = p1.productId and TO_CHAR(SYSDATE,'YY/MM/DD')=TO_CHAR(p1.regdate,'YY/MM/DD') and (${searchOption} like '%' || #{inputWord} || '%')
+   				 order by p.productId desc)tt )
+    </select>
+    
+    <!-- 상품등록 -->
+    <insert id="getProductWrite" parameterType="java.util.Map">
+       insert into product_table values (seq_product_table.nextval, #{productName}, #{productNameKor}, #{modelId}, REPLACE(#{releasePrice}, ',' ,''), #{img1}, #{img2}, #{img3}, #{brandName}, #{productCollection}, #{releaseDate}, sysdate)
+    </insert>  
+    <select id="getProductM" parameterType="String" resultType="int">
+   		select productId from product_table where modelId = #{modelId}
+    </select>
+    <insert id="priceWrite" parameterType="int">
+       insert into price_table values (seq_price_table.nextval,#{productId}, 250000 + (DBMS_RANDOM.VALUE(-100000, 100000)), sysdate)
+    </insert>
+   
+   
+    <!-- 모델번호가 일치하는 상품재고 -->
+    <select id="getModelId" resultType="String" parameterType="int"> 
+	   	SELECT dog.* FROM (select distinct p.modelId from stock_table s inner join product_table p on p.productId= #{productId})dog
+    </select>
+    
+    <!-- 모델번호가 일치하는 상품재고 -->
+    <select id="getProductStock" resultType="stock" parameterType="String"> 
+   		 select s.productSize                     
+                  from product_table p,
+                       stock_table s
+                                    
+                  where p.modelId = #{modelId}                 
+                  and s.productId = p.productId
+    </select>
+    
+   <!-- 상품등록2 -->
+   <insert id="getProductWrite2" parameterType="product">
+      insert into product_table values (seq_product_table.nextval, #{productName}, #{productNameKor}, #{modelId}, #{releasePrice}, #{img1}, #{img2}, #{img3}, #{brandName}, #{productCollection}, #{releaseDate}, sysdate)
+   </insert>
+    
+  	<!-- 상품삭제 -->
+  	 <delete id="deleteStock2" parameterType="int">
+    	select * from product_table p, stock_table s
+				where p.productId = s.productId and s.stockId=#{stockId}
+     </delete>
+  
+    <!-- 상품삭제 -->
+    <delete id="deleteProduct" parameterType="String">
+    	delete from product_table where modelId=#{modelId}
+    </delete>
+    
+    <!-- 싱품수정을 위한 특정 상품의 정보 -->
+    <select id="getProductInfo" parameterType="String" resultType="product">
+    	select * from product_table where modelId=#{modelId}
+    </select>
+    
+    <!-- 상품 수정 -->
+    <update id="productUpdate" parameterType="java.util.Map">
+    	update product_table set productName=#{productName}, releasePrice= REPLACE(#{releasePrice}, ',' ,''), img1=#{img1}, img2=#{img2}, img3=#{img3}, brandName=#{brandName}, productCollection=#{productCollection}, releaseDate=to_date(#{releaseDate}) + 1 where modelId = #{modelId}
+    </update>
+    
+    <select id="getProductById" parameterType="int" resultType="product">
+    	select * from product_table where productId=#{productId}
+    </select>
+    
+    <select id="getProductListForIndex" parameterType="java.util.Map" resultType="product">
+		SELECT * FROM
+		    (SELECT ROWNUM AS rn, a.* FROM
+		        (SELECT p.*, 
+		                a.price AS todaysPrice
+		        FROM product_table p,
+		            (SELECT productId, price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD'))a
+		        WHERE p.productId = a.productId
+		        ORDER BY p.productId DESC)a)
+		WHERE rn BETWEEN #{startNum} AND #{endNum}
+    </select>
+    
+    <select id="getSearchResult" parameterType="String" resultType="product">
+    	SELECT * FROM product_table WHERE productName LIKE '%' || #{keyword} || '%' OR productNameKor LIKE '%' || #{keyword} || '%' OR modelId LIKE '%' || #{keyword} || '%'
+    </select>
+    
+    <select id="getProductListForSearch" resultType="product">
+    	SELECT productId, 
+		        LOWER(productName) AS productName, 
+		        LOWER(brandName) AS brandName,
+		        productNameKor, 
+		        img1 
+		FROM product_table
+    </select>
+    
+    <select id="getProductListForSearch2" resultType="product">
+    	SELECT productId, 
+		       productName, 
+		       brandName, 
+		       productNameKor
+		FROM product_table
+    </select>
+ </mapper>
+
+ 
+ 

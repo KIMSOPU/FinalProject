@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="orderSQL">
+	<!-- 전체 목록 -->
+	<select id="getOrderList" parameterType="java.util.Map" resultType="order">
+		SELECT * FROM
+		    (SELECT ROWNUM rn, o.* FROM 
+		        (SELECT o.orderId, o.userId, o.paymentId, o.deliveryId, o.addressId, o.stockId, o.orderDate, o.phoneNum AS orderPhoneNum,
+		                s.productId, s.exportDate,
+		                p.productName, p.modelId, p.releasePrice, p.img1, p.img2, p.img3, p.releaseDate, p.brandName, p.productCollection, p.regDate AS productRegDate,
+		                pay.paymentMethod, pay.bank, pay.accountNum, pay.accountHolder, pay.paymentDate,
+		                u.email, u.username, u.pwd, u.nickname, u.auth, u.phoneNum AS userPhoneNum, u.introMsg, u.reportCount, u.img AS userImg, u.lastDate, u.regDate AS userRegDate,
+		                d.deliveryStatus, d.trackingNum, d.regDate AS deliveryRegDate,
+		                a.userId AS addressUserId, a.recipient, a.addr1, a.addr2, a.zipcode, a.regdate AS addressRegDate
+		        FROM order_table o
+		            LEFT JOIN 
+		                stock_table s
+		            ON o.stockId = s.stockId
+		            LEFT JOIN
+		                product_table p
+		            ON s.productId = p.productId
+		            LEFT JOIN
+		                payment_table pay
+		            ON o.paymentId = pay.paymentId
+		            LEFT JOIN 
+		                user_table u
+		            ON o.userId = u.userId
+		            LEFT JOIN 
+		                delivery_table d
+		            ON o.deliveryId = d.deliveryId
+		            LEFT JOIN
+		                address_table a
+		            ON o.addressId = a.addressId
+		        ORDER BY orderId desc)o)
+		WHERE rn BETWEEN #{startNum} AND #{endNum}
+		
+	</select>
+	
+	<!-- 한개 가져오기 -->
+	<select id="getOrder" parameterType="int" resultType="order">
+		SELECT * FROM order_table WHERE orderId = #{orderId}
+	</select>
+	
+	<!-- 총글수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM order_table
+	</select>
+	
+	<!-- 검색 -->
+	<select id="getOrderSearchList" parameterType="java.util.Map" resultType="order">
+		 SELECT * FROM
+			    (SELECT ROWNUM rn, o.* FROM 
+			        (SELECT o.orderId, o.userId, o.paymentId, o.deliveryId, o.addressId, o.stockId, o.orderDate, o.phoneNum AS orderPhoneNum,
+			                s.productId, s.exportDate,
+			                p.productName, p.modelId, p.releasePrice, p.img1, p.img2, p.img3, p.releaseDate, p.brandName, p.productCollection, p.regDate AS productRegDate,
+			                pay.paymentMethod, pay.bank, pay.accountNum, pay.accountHolder, pay.paymentDate,
+			                u.email, u.username, u.pwd, u.nickname, u.auth, u.phoneNum AS userPhoneNum, u.introMsg, u.reportCount, u.img AS userImg, u.lastDate, u.regDate AS userRegDate,
+			                d.deliveryStatus, d.trackingNum, d.regDate AS deliveryRegDate,
+			                a.userId AS addressUserId, a.recipient, a.addr1, a.addr2, a.zipcode, a.regdate AS addressRegDate
+			        FROM order_table o
+			            LEFT JOIN 
+			                stock_table s
+			            ON o.stockId = s.stockId
+			            LEFT JOIN
+			                product_table p
+			            ON s.productId = p.productId
+			            LEFT JOIN
+			                payment_table pay
+			            ON o.paymentId = pay.paymentId
+			            LEFT JOIN 
+			                user_table u
+			            ON o.userId = u.userId
+			            LEFT JOIN 
+			                delivery_table d
+			            ON o.deliveryId = d.deliveryId
+			            LEFT JOIN
+			                address_table a
+			            ON o.addressId = a.addressId
+			        ORDER BY orderId desc)o)
+			        
+			        <if test='searchOption == "username"'>    
+						WHERE LOWER(username) LIKE '%' || LOWER(#{keyword}) || '%'
+					</if>
+					<if test='searchOption == "productName"'>    
+						WHERE LOWER(productName) LIKE '%' || LOWER(#{keyword}) || '%'
+					</if>
+					<if test='searchOption == "orderId"'>    
+						WHERE ${searchOption} =  #{keyword} 
+					</if>
+	</select>
+	
+	  <!-- 오더 검색 페이징-->
+    <select id="OrderSearchListPaging" parameterType="java.util.Map"  resultType="int">
+    	select count (*) from
+			    (SELECT ROWNUM rn, o.* FROM 
+			        (SELECT o.orderId, o.userId, o.paymentId, o.deliveryId, o.addressId, o.stockId, o.orderDate, o.phoneNum AS orderPhoneNum,
+			                s.productId, s.exportDate,
+			                p.productName, p.modelId, p.releasePrice, p.img1, p.img2, p.img3, p.releaseDate, p.brandName, p.productCollection, p.regDate AS productRegDate,
+			                pay.paymentMethod, pay.bank, pay.accountNum, pay.accountHolder, pay.paymentDate,
+			                u.email, u.username, u.pwd, u.nickname, u.auth, u.phoneNum AS userPhoneNum, u.introMsg, u.reportCount, u.img AS userImg, u.lastDate, u.regDate AS userRegDate,
+			                d.deliveryStatus, d.trackingNum, d.regDate AS deliveryRegDate,
+			                a.userId AS addressUserId, a.recipient, a.addr1, a.addr2, a.zipcode, a.regdate AS addressRegDate
+			        FROM order_table o
+			            LEFT JOIN 
+			                stock_table s
+			            ON o.stockId = s.stockId
+			            LEFT JOIN
+			                product_table p
+			            ON s.productId = p.productId
+			            LEFT JOIN
+			                payment_table pay
+			            ON o.paymentId = pay.paymentId
+			            LEFT JOIN 
+			                user_table u
+			            ON o.userId = u.userId
+			            LEFT JOIN 
+			                delivery_table d
+			            ON o.deliveryId = d.deliveryId
+			            LEFT JOIN
+			                address_table a
+			            ON o.addressId = a.addressId
+			        ORDER BY orderId desc)o)
+    </select>
+	
+	
+	<select id="getOrderView" parameterType="int" resultType="order">
+		SELECT * FROM
+	    (SELECT ROWNUM rn, o.* FROM 
+	        (SELECT o.orderId, o.userId, o.paymentId, o.deliveryId, o.addressId, o.stockId, o.orderDate, o.phoneNum AS orderPhoneNum,
+	                s.productId, s.exportDate, pri.price,
+	                p.productName, p.modelId, p.releasePrice, p.img1, p.img2, p.img3, p.releaseDate, p.brandName, p.productCollection, p.regDate AS productRegDate,
+	                pay.paymentMethod, pay.bank, pay.accountNum, pay.accountHolder, pay.paymentDate,
+	                u.email, u.username, u.pwd, u.nickname, u.auth, u.phoneNum AS userPhoneNum, u.introMsg, u.reportCount, u.img AS userImg, u.lastDate, u.regDate AS userRegDate,
+	                d.deliveryStatus, d.trackingNum, d.regDate AS deliveryRegDate,
+	                a.userId AS addressUserId, a.recipient, a.addr1, a.addr2, a.zipcode, a.regdate AS addressRegDate
+	        FROM order_table o
+	            LEFT JOIN 
+	                stock_table s
+	            ON o.stockId = s.stockId
+	            LEFT JOIN
+	                product_table p
+	            ON s.productId = p.productId
+				
+				LEFT JOIN
+                   ((SELECT productId, price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD')))pri
+                   
+				ON p.productId = pri.productId
+
+	            LEFT JOIN
+	                payment_table pay
+	            ON o.paymentId = pay.paymentId
+	            LEFT JOIN 
+	                user_table u
+	            ON o.userId = u.userId
+	            LEFT JOIN 
+	                delivery_table d
+	            ON o.deliveryId = d.deliveryId
+	            LEFT JOIN
+	                address_table a
+	            ON o.addressId = a.addressId
+				    
+	        ORDER BY orderId desc)o)
+		WHERE orderId = #{orderId}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

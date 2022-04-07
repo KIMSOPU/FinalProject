@@ -1,0 +1,77 @@
+/* 페이징 */
+
+[class*='PagingDiv']{
+	 text-align: center;
+	 margin-top: 10px;
+	 color: #9e9e9e;
+     cursor: pointer;
+     font-size: 17px;
+}
+
+[class*='PagingDiv'] span{
+	 margin: 0px 10px;
+	 display: inline;
+}
+
+#currentPaging {
+	color: #222;
+	font-weight: 700;
+	curser: pointer;
+}
+
+[class*='PagingDiv'] span:hover {
+    margin: 0px 10px;
+    text-decoration: underline;
+}
+/* 전체삭제 버튼 */
+#deleteAll{
+	float: left;
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
+}
+
+/* 검색버튼 */
+#searchDiv{
+	width: 400px;
+	margin: auto;
+	
+}
+
+#searchOption{
+	width: 20%;
+	margin-right: 10px;
+	border: 1px;
+	outline: 0;
+	background-color: rgba(222, 222, 222, 0.3);
+}
+
+/* 상품등록 버튼 */
+#productWriteBtn{
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
+    margin-left: 1000px;
+}
+
+/* 반응형 웹을 위한 div태그 위치 */
+.list{
+	float: left;
+}
+
+.write{
+	float: right;
+}
+
+/* 수정, 삭제 */
+.linkA {
+	font-size: 16px;
+	color: black;
+}
+

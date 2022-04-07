@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="salesSQL">
+
+
+	<!-- 구매율, 판매율 차트 판매 조회(관리자) -->
+	<select id="getSalesHis" resultType="sales">
+		SELECT count(salesId) AS sellCount, regdate FROM sales_table 
+		WHERE TO_CHAR(regDate, 'YYYYMMDD') BETWEEN TO_CHAR(sysdate-6, 'YYYYMMDD') AND TO_CHAR(sysdate, 'YYYYMMDD')
+		    AND status = 1 
+		GROUP BY regDate
+        ORDER BY regDate
+
+	</select>
+	
+	<!-- 사용자 선호 브랜드 조회(관리자페이지) -->
+	<select id="getBrandHis" resultType="sales">
+		SELECT p.brandName, COUNT(brandName) AS sellCount
+		FROM sales_table s
+		    LEFT JOIN 
+		        product_table p
+		    ON s.productId = p.productId
+		GROUP BY brandName
+	</select>
+	
+	<select id="getLowestPriceSalesDTO" parameterType="int" resultType="sales">
+		SELECT r.* FROM
+		    (SELECT ROWNUM rn, s.* FROM
+		        sales_table s
+		    WHERE price = (SELECT MIN(price) FROM (SELECT * FROM sales_table WHERE productId = #{productId} AND status = 0))
+		        AND status = 0 AND productId = #{productId})r
+		WHERE rn = 1
+	</select> 
+	
+	<select id="getSalesListBySize" parameterType="java.util.Map" resultType="sales">
+		SELECT * FROM sales_table 
+		WHERE productId = #{productId}
+			AND productSize = #{productSize}
+            AND status = 0
+		ORDER BY price
+	</select>
+	
+			<!-- 전체 목록 -->
+	<select id="getSalesList" parameterType="java.util.Map" resultType="sales">
+		SELECT * FROM
+				(SELECT ROWNUM rn, tt.* FROM
+				(SELECT * FROM sales_table  
+				        ORDER BY salesId DESC)tt)
+	    WHERE rn BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+		<!-- 총글수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM sales_table
+	</select>
+	
+	<select id="getPurchaseHis" resultType="sales">
+		SELECT count(salesId) AS sellCount, regdate FROM sales_table 
+		WHERE TO_CHAR(regDate, 'YYYYMMDD') BETWEEN TO_CHAR(sysdate-6, 'YYYYMMDD') AND TO_CHAR(sysdate, 'YYYYMMDD')
+		    AND status = 1 
+		GROUP BY regdate
+
+	</select>
+	
+	</mapper> 

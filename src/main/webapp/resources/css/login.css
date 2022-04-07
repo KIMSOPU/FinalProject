@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+.login {
+	margin: 0 auto;
+    padding: 58px 0 160px;
+    width: 400px;
+}
+
+.login_title {
+	display: block;
+    padding-bottom: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+    font-family: "Bangers", cursive;
+    font-weight: bold;
+    text-align:center;
+    cursor: pointer;
+}
+
+.login_logo {
+	width: 250px;
+    height: 56px;
+}
+
+.input_box {
+	position: relative;
+    padding: 5px 0 20px;
+}
+
+.input_title {
+	font-size: 13px;
+	padding: 0;
+}
+
+.input_txt {
+	padding-bottom: 10px;
+	width: 100%;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 1px solid grey;
+}
+
+.input_txt:focus {
+	outline: 0;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
+}
+
+.input_err {
+	display: block;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+    margin: 3px;
+}
+
+.login_btn_box {
+	padding-top: 20px;
+}
+
+.btn {
+	cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.login_btn {
+	outline: none;
+	border: none;
+	width: 100%;
+    height: 52px;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    line-height: 50px;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+ 
+.login_btn_disabled {
+    background-color: #ebebeb;
+}
+
+.login_btn_able {
+    background-color: #222222;
+}
+
+.look_box {
+    display: block;
+    padding-left: 0;
+    text-align: center;
+}
+
+.look_link {
+	margin: auto;
+    padding: 0 20px;
+    display: inline-flex;
+    font-size: 13px;
+    letter-spacing: -.07px;
+}
+
+.look_list {
+    display: inline-flex;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.social_login {
+	display: block;
+	border: 1px solid #d3d3d3;
+	border-radius: 12px;
+	margin-top: 40px;
+}
+
+.kakao_login_btn {
+	display: flex;
+	outline: 0;
+	border: none;
+	position: relative;
+    color: #222;
+    border-color: #ebebeb;
+    border-radius: 12px;
+    width: 100%;
+    background-color: transparent;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kakao_login {
+	width: 40px;
+    height: 40px;
+}
+
+.txt{
+	padding-left: 100px;
+}
+
+/* .social_login {
+	margin-top: 40px;
+    display: block;
+}
+
+.kakao_login {
+    cursor: pointer;
+}
+
+.kakao_login_logo {
+	width: 100%;
+    height: 50px;
+} */

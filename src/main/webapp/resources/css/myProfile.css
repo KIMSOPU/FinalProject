@@ -1,0 +1,266 @@
+@charset "UTF-8";
+div {
+	display: block;
+}
+
+button {
+	outline: none;
+	background: none;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+h6, h5, p {
+	margin: 0;
+}
+
+.recent_area .delete_btn {
+    padding: 0;
+}
+
+.myProfile_info {
+    max-width: 480px;
+}
+
+.user_profile {
+	display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 50px 0 38px;
+    border-bottom: 1px solid #ebebeb;
+    background-color: #fff;
+}
+
+.profile_thumb {
+	-webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    overflow: hidden;
+    margin-right: 18px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    text-align: center;
+}
+
+.thumb_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;	
+}
+
+.profile_detail {
+	width: 100%;
+}
+
+.profile_detail .name {
+	font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -.12px;
+    color: #000;
+}
+
+.profile_detail .input_box {
+	border-bottom: 1px solid grey;
+}
+
+.profile_detail .input_txt {
+	width: 85%;
+	border-bottom: none;
+}
+
+.profile_detail .input_txt:focus {
+	border-bottom: none;
+}
+
+.user_profile .unit, .user_profile .modify, .user_profile .input_box{
+	padding: 0;
+}
+
+.fa-pencil, .fa-check, .fa-xmark {
+	position: absolute;
+    padding-left: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    right: 0;
+}
+
+.fa-xmark {
+	right: 30px;
+}
+
+.profile_btn_box {
+	margin-top: 8px;
+    font-size: 0;
+}
+
+#delete_img_btn {
+	margin-left: 8px;
+	padding-top: 1px;
+    padding-left: 11px;
+    padding-right: 12px;
+}
+
+#modify_img_btn {
+	padding-top: 1px;
+    padding-left: 11px;
+    padding-right: 12px;
+}
+
+#modify_img_btn label {
+	cursor: pointer;
+}
+
+.myProfile_group {
+	padding-top: 40px;
+}
+
+.group_title {
+    font-size: 18px;
+    letter-spacing: -.27px;
+    margin: 0;
+}
+
+.unit {
+	display: block;
+    position: relative;
+    padding: 25px 60px 0 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.title {
+    font-size: 13px;
+    letter-spacing: -.07px;
+}
+
+.desc {
+    padding: 15px 0 10px;
+    font-size: 14px;
+    letter-spacing: -.16px;
+}
+
+.btn {
+	display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    height: 34px;
+    line-height: 32px;
+    font-size: 12px;
+}
+
+.btn.modify_btn {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    padding-top: 1px;
+    padding-left: 11px;
+    padding-right: 12px;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    font-size: 12px;
+    letter-spacing: -.06px;
+    padding: 0 14px;
+}
+
+.btn.auth_btn {
+	position: absolute;
+    right: 0;
+    border: 1px solid #d3d3d3;
+    color: #fff;
+    background-color: #222222;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    padding: 0 14px;
+}
+
+.withdrawal_btn {
+	margin-top: 55px;
+    padding: 5px 0;
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+    text-decoration: underline;
+}
+
+.modify {
+	padding-top: 23px;
+}
+
+.input_box {
+	padding: 15px 0 15px; 
+}
+
+.input_txt {
+	padding: 15px 0 10px;
+    letter-spacing: -.16px;
+    width: 100%;
+    border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 1px solid grey;
+}
+
+.input_txt:focus {
+	outline: 0;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
+}
+
+.input_err {
+	display: none;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+    margin: 3px;
+}
+
+.input_msg {
+	display: none;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+    margin: 3px;
+}
+
+.modify {
+	display: none;
+	position: relative;
+}
+
+.modify_btn_box {
+	display: none;
+	padding-top: 28px;
+    text-align: center;
+}
+
+.reset_btn {
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    letter-spacing: -.06px;
+    padding: 0 14px;
+}
+
+.save_btn {
+    letter-spacing: -.06px;
+    padding: 0 14px;
+    margin-left: 5px;
+    color: #fff;
+    background-color: #222222;
+}

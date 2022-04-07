@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.help_success {
+	margin: 0 auto;
+    padding: 60px 0 160px;
+    width: 400px;
+}
+
+.notice_txt {
+	font-size: 15px;
+    letter-spacing: -.15px;
+    text-align: center;
+}
+
+.login_btn {
+	display: block;
+	margin: auto;
+    width: 200px;
+    height: 52px;
+    font-weight: 600;
+    line-height: 50px;
+    border-radius: 14px;
+    font-size: 16px;
+    text-align: center;
+    background-color: #222;
+    color: #fff;
+    cursor: pointer;
+}

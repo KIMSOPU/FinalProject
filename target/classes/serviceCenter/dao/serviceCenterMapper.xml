@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="serviceCenterSQL">
+	<!-- 전체 글 수 -->
+	<select id="getTotalDB" parameterType="String" resultType="Integer">
+		select count(*) from ${tableName}
+	</select>
+	
+	<!-- announcement_board 목록 불러오기 -->
+	<select id="getAnnouncementList" parameterType="java.util.Map" resultType="AnnouncementBoardDTO">
+		select b.* from
+		    (select rownum rn, a.* from
+	        	(select * from announcement_board order by regdate desc)a)b
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
+	<!-- announcement_board 조회수 증가 -->
+	<update id="hit" parameterType="String">
+		update announcement_board set hit=hit+1 where announcementId=#{announcementid}
+	</update>
+	
+	<!-- announcement_board 한 개 불러오기 -->
+	<select id="getAnnouncementDetail" parameterType="String" resultType="AnnouncementBoardDTO">
+		select * from announcement_board where announcementid=#{announcementid}
+	</select>
+	
+	<!-- qna_table 목록 불러오기 -->
+	<select id="getQnaList" parameterType="java.util.Map" resultType="QnaTableDTO">
+		select * 
+			from (select rownum rn, totalData.* 
+				from (select * from qna_table order by pseq desc, step asc) totalData) 
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
+	<!-- qna 글 비밀번호 확인 -->
+	<select id="checkPwd" parameterType="java.util.Map" resultType="QnaTableDTO">
+		select * from qna_table where qnaId=#{qnaId} and qnaPwd=#{qnaPwd}
+	</select>
+	
+	<!-- qna 한 개 불러오기 -->
+	<select id="getQnaDetail" parameterType="String" resultType="QnaTableDTO">
+		select * from qna_table where qnaId=#{qnaId}
+	</select>
+	
+	<!--  특정 qna의 답글 불러오기 -->
+	<select id="getQnaReply" parameterType="String" resultType="QnaTableDTO">
+		select * from qna_table where pseq=#{qnaId} and step=1
+	</select>
+	
+	<!-- qna 글 등록 -->
+	<insert id="qnaRegister" parameterType="java.util.Map">
+		insert into qna_table values(SEQ_QNA_TABLE.nextval, #{qnaName}, #{title}, #{contents}, #{qnaPwd}, 0, SEQ_QNA_TABLE.currval, 0, SYSDATE)
+	</insert>
+	
+	<!-- qna 글 삭제 -->
+	<delete id="qnaDelete" parameterType="String">
+		delete qna_table where qnaId=#{qnaId}
+	</delete>
+	
+	<!-- qna 글 수정 -->
+	<update id="qnaUpdate" parameterType="java.util.Map">
+		update qna_table set qnaName=#{qnaName}, title=#{title}, contents=#{contents}, qnaPwd=#{qnaPwd} where qnaId=#{qnaId}
+	</update>
+</mapper>

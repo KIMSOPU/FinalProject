@@ -1,0 +1,487 @@
+.shop-content-box p {
+	padding: 0;
+	margin: 0;
+}
+
+.shop-content-box button {
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    background-color: rgba(0,0,0,0);
+    appearance: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.shop-content-box {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.shop-title {
+  text-align: center;
+}
+
+.status_txt {
+    font-size: 14px;
+    letter-spacing: -.21px;
+    font-weight: 700;
+}
+
+.status_num {
+	display: none;
+    margin-left: 4px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 20px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 30px;
+    background-color: #222;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.delete_status_num {
+	display: none;
+	text-decoration: underline;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.5);
+    cursor: pointer;
+}
+
+.product-conent-box {
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+.product-content-list {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* 필터 */
+.search_filter {
+	width: 210px;
+    margin-right: 10px;
+    padding-right: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.filter_status {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 23px 0 15px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.status_txt {
+    font-size: 14px;
+    letter-spacing: -.21px;
+    font-weight: 700;
+}
+
+.filter_list {
+	border-bottom: 1px solid #ebebeb;
+}
+
+.filter_list.selected .main_title:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    margin-left: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background-color: #f15746;
+}
+
+.filter_title {
+	display: flex;
+	padding: 16px 0;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.title_box {
+	display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    max-width: calc(100% - 30px);
+}
+
+.main_title {
+    position: relative;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    font-weight: 600;
+}
+
+.placeholder {
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    letter-spacing: -.15px;
+    color: rgba(34,34,34,.5);
+}
+
+.close {
+	display: none;
+}
+
+.icon_box {
+    height: 20px;
+}
+
+.fa-plus, .fa-minus, .fa-x {
+	color: rgb(185, 185, 185);
+}
+
+.filter_menu {
+	display: none;
+	padding-bottom: 24px;
+}
+
+.open {
+	display: block;
+}
+
+.checkbox_item+.checkbox_item {
+    padding-top: 10px;
+}
+
+.menu_on {
+    font-weight: 700;
+}
+
+.link_txt {
+    max-width: 160px;
+    padding-left: 10px;
+}
+
+.fa-square {
+	padding-right: 10px;
+}
+
+.fa-square-check {
+	padding-right: 10px;
+}
+
+/* 사이즈 */
+.column_list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -2px;
+   /*margin-bottom: 18px;*/
+}
+
+.column_menu {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 2px;
+    width: calc(33.33333% - 9px);
+    height: 32px;
+    border: 1px solid #d3d3d3;
+    font-size: 13px;
+    color: #000;
+}
+
+.column_menu:first-child, .column_menu:nth-child(2), .column_menu:nth-child(3) {
+    margin-top: 0;
+}
+
+.column_menu.menu_on {
+    border-color: #222;
+    color: #222;
+    font-weight: 700;
+}
+
+.filter_tag {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px 0 20px 12px;
+}
+
+.tag_item {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 8px 8px 0 0;
+    padding: 4px 2px 4px 10px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+}
+
+.tag {
+    font-size: 12px;
+    letter-spacing: -.05px;
+}
+
+.delete_filter_tag {
+	width: 24px;
+    height: 24px;
+}
+
+.fa-x {
+	cursor: pointer;
+}
+
+/* 정렬박스 */
+.shop-search-order{
+	position: relative;
+	cursor: pointer;
+}
+
+.shop-search-option {
+    display: flex;
+    padding-right: 40px;
+    -webkit-box-pack: justify;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.sorting_title {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: -.21px;
+    font-weight: 600;
+}
+
+.sorting_title:after {
+    content: "";
+    margin-left: 2px;
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzIyMiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNi40NyAxOS41M2wuNTMuNTMuNTMtLjUzIDQtNC0xLjA2LTEuMDYtMi43MiAyLjcyVjVoLTEuNXYxMi4xOWwtMi43Mi0yLjcyLTEuMDYgMS4wNiA0IDR6TTE3LjUzIDQuNDdMMTcgMy45NGwtLjUzLjUzLTQgNCAxLjA2IDEuMDYgMi43Mi0yLjcyVjE5aDEuNVY2LjgxbDIuNzIgMi43MiAxLjA2LTEuMDYtNC00eiIgY2xpcC1ydWxlPSJldmVub2RkIi8+PC9zdmc+) no-repeat;
+}
+
+.sorting_list {
+	display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 250px;
+    width: 278px;
+    background-color: #fff;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sorting_link {
+    position: relative;
+    display: block;
+    padding: 12px 36px 12px 16px;
+    cursor: pointer;
+}
+
+.sorting_item:hover{
+	background-color: #ebebeb;
+}
+
+.sorting_item.item_on .main_desc {
+    color: #222;
+    font-weight: 700;
+}
+
+.main_desc {
+    font-size: 14px;
+    letter-spacing: -.21px;
+}
+
+.sub_desc {
+    margin-top: 4px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    color: rgba(34,34,34,.5);
+}
+
+.sorting_link {
+    position: relative;
+    display: block;
+    padding: 12px 36px 12px 16px;
+}
+
+.sorting_desc p {
+	margin: 0;
+	text-align: left;
+}
+
+/* 프로덕트 박스 */
+
+.product_list {
+  padding: 0px;
+  padding-right: 5px;
+  margin-bottom: 15px;
+}
+
+.product_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-left: 10vh; */
+}
+
+.product_list-img {
+  cursor: pointer;
+  width: 230px;
+  height: 230px;
+  background-color: rgb(235, 240, 245);;
+  border-radius: 4px;
+}
+
+.product_list-infobox {
+  cursor: pointer;
+}
+
+.product_list {
+  padding: 12px;
+}
+
+.brand-text {
+  font-size: 13px;
+  font-weight: bold;
+  max-width: 230px;	
+}
+.product_name {
+  font-size: 13px;
+  padding: 0px;
+  margin: 0px;
+  max-width: 200px;
+}
+.product_name_translate {
+  color: rgb(136, 136, 136);
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  max-width: 200px;
+}
+
+.product_list-infobox {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding-left: 2px;
+}
+
+.add_btn {
+  cursor: porinter;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  color: rgb(117, 117, 117);
+  text-decoration: none;
+  border: solid 1px #bcbcbc;
+  padding: 8px 25px;
+}
+
+.amount-lg {
+  font-size: 13px;
+  margin: 10px 0px;
+  font-weight: 700;
+}
+.product-icon-box {
+  display: flex;
+
+  justify-self: start;
+  font-size: 14px;
+}
+
+.product-icon {
+	padding-right: 5px;
+}
+
+.fa-bookmark, .fa-indent {
+	cursor: pointer;
+}
+
+.product-like,
+.product-dashboard {
+  margin-right: 12px;
+  margin-left: 2px;
+}
+
+.product-icon-box i {
+  margin-top: 3px;
+  padding-left: 5px;
+}
+
+.product_list-img img{
+	object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+	-webkit-appearance: none;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:hover {
+    border-color: rgba(170, 170, 170, 0.5);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+.checkbox_item {
+	position: relative;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.check_label {
+	display: inline-flex;
+	align-items: center;
+    max-width: 100%;
+    cursor: pointer;
+}

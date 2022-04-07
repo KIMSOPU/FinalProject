@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="questionSQL">
+	
+	<!-- 문의사항 리스트 -->
+	<select id="getQnaList" parameterType="java.util.Map" resultType="question">
+		<if test='option.equals("all")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table 
+			        order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("standby")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table where status = 0
+			        order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("end")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table where status = 1
+			       order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+	</select>
+		
+	<!-- 문의사항 페이징 처리 -->
+	<select id="getTotalQna" parameterType="String" resultType="int" >
+		<if test='option.equals("all")'>
+			select count(*) from qna_table
+		</if>
+		<if test='option.equals("standby")'>
+			select count(*) from qna_table where status = 0
+		</if>
+		<if test='option.equals("end")'>
+			select count(*) from qna_table where status = 1
+		</if>
+	</select>
+	
+	<!-- 문의사항 개별 -->
+	<select id="getQnaView" parameterType="int" resultType="question"> 
+		select * from qna_table where qnaId=#{qnaId} 
+	</select>
+	
+	<!-- 문의사항 답변 작성 -->
+	<insert id="writeQna" parameterType="java.util.Map">		
+		insert into qna_table values (seq_qna_table.nextval, '관리자', #{title}, #{contents}, #{qnaPwd}, 1, #{pseq}, 2, sysdate)
+	</insert>
+	
+	<!-- 답변작성 후 원글의 답변상태 업데이트 -->
+	<update id="updateStatus" parameterType="int">
+		update qna_table set status=1 where qnaId=#{pseq}
+	</update>
+	
+	<!-- 문의사항 검색결과 -->
+	<select id="searchQnaList" parameterType="java.util.Map" resultType="question">
+		<if test='option.equals("all")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table 
+			
+			where ${searchOption} like '%' || #{inputWord} || '%'	
+			
+			        order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("standby")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table 
+			
+			where ${searchOption} like '%' || #{inputWord} || '%' and status = 0
+			
+			        order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		<if test='option.equals("end")'>
+			<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from qna_table
+			
+			where ${searchOption} like '%' || #{inputWord} || '%' and status = 1
+			
+			
+			        order by pseq desc, step asc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+	</select>
+	
+	<!-- 문의사항 검색결과 페이징 처리 -->
+	<select id="getSearchTotalQna" parameterType="java.util.Map" resultType="Integer" >
+		<if test='option.equals("all")'>
+			select count(*) from qna_table where ${searchOption} like '%' || #{inputWord} || '%'
+		</if>
+		<if test='option.equals("standby")'>
+			select count(*) from qna_table where status = 0 and ${searchOption} like '%' || #{inputWord} || '%'
+		</if>
+		<if test='option.equals("end")'>
+			select count(*) from qna_table where status = 1 and ${searchOption} like '%' || #{inputWord} || '%'
+		</if>		
+	</select>
+	
+	<!-- 답변 수정 -->
+	<update id="updateQna" parameterType="java.util.Map">
+		update qna_table set contents=#{contents} where qnaId=#{qnaId}
+	</update>
+	
+	<!-- 문의사항 삭제 -->
+	<delete id="deleteQna" parameterType="Integer">
+		delete from qna_table where qnaId=#{qnaId}
+	</delete>
+	
+</mapper>

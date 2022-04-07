@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>	
+	<typeAliases>
+		<typeAlias type="order.bean.OrderDTO" alias="order"/>
+		<typeAlias type="deal.bean.DealDTO" alias="deal"/>
+		<typeAlias type="stock.bean.StockDTO" alias="stock"/>
+		<typeAlias type="content.bean.AnnounceDTO" alias="announce"/>
+		<typeAlias type="event.bean.EventDTO" alias="event"/>
+		<typeAlias type="product.bean.ProductDTO" alias="product"/>
+		<typeAlias type="question.bean.QuestionDTO" alias="question"/>
+		<typeAlias type="check.bean.CheckDTO" alias="check"/>
+		<typeAlias type="user.bean.UserDTO2" alias="user2"/>
+		<typeAlias type="sales.bean.SalesDTO" alias="sales"/>
+		<typeAlias type="purchase.bean.PurchaseDTO" alias="purchase"/>
+		<typeAlias type="purchase.bean.PurchaseDTO" alias="purchaseDTO"/>
+		
+		
+		
+		<typeAlias type="serviceCenter.bean.AnnouncementBoardDTO" alias="AnnouncementBoardDTO"/>
+		<typeAlias type="serviceCenter.bean.QnaTableDTO" alias="QnaTableDTO"/>
+		
+		<typeAlias type="style.bean.StyleBoardDTO" alias="StyleBoardDTO"/>
+		<typeAlias type="style.bean.StyleCardDTO" alias="StyleCardDTO"/>
+		<typeAlias type="style.bean.StyleReplyDTO" alias="StyleReplyDTO"/>
+		<typeAlias type="style.bean.StyleLikeDTO" alias="StyleLikeDTO"/>
+		
+		<typeAlias type="account.bean.AccountDTO" alias="account"/>
+		<typeAlias type="address.bean.AddressDTO" alias="address"/>
+		<typeAlias type="user.bean.UserDTO" alias="user"/>
+		<typeAlias type="shop.bean.ShopDTO" alias="shop"/>
+		
+		<typeAlias type="mypage.bean.WishListDTO" alias="WishListDTO"/>
+		
+		<typeAlias type="stats.bean.StatsDTO" alias="stats"/>
+	</typeAliases>
+</configuration>

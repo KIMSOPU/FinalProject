@@ -1,0 +1,54 @@
+@import "reset.css";
+@import "bannerItem.css";
+@import "itemList.css";
+@import "product.css";
+@import "style.css";
+
+
+.want_margin {
+  /* background-color: rgb(255, 214, 206); */
+  max-width: 1280px;
+  margin:0px auto;
+}
+
+.notice_lg {
+  background-color: black;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+}
+
+.notice_lg a {
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+
+.main-section, .product_wrap, .style-slick-div {
+	width: 100%;
+}
+
+.realtitle {
+	font-size: 24px;
+    letter-spacing: -.12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.product-title {
+	max-width: 1280px;
+	padding: 0 40px;
+} 
+ 
+.product-realtitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.product-subtitle {
+  font-size: 14px;
+  color: rgb(161, 161, 161);
+}

@@ -1,0 +1,336 @@
+@charset "UTF-8";
+
+p {
+	margin: 0;	
+}
+
+input, textarea {
+	padding: 0;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.content_title {
+	display: flex;
+	position: relative;
+    padding: 5px 0 6px;
+}
+
+.add_btn {
+	border: none;
+}
+
+.btn_box {
+	position: absolute;
+	right: 0;
+	bottom: 15px;
+    width: max-content;
+    height: 34px;
+    line-height: 32px;
+    border-radius: 10px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+}
+
+.basic {
+	padding: 30px 0 29px;
+    border-bottom: 2px solid #222;
+}
+
+.other {
+	padding: 30px 0 29px;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.basic_item, .other_list {
+	/* display: flex; */
+	position: relative;
+}
+
+.myAddress_info {
+	padding-top: 4px;
+    font-size: 14px;
+    letter-spacing: -.21px;
+}
+
+.myAddress_info .name {
+	display: inline-block;
+    vertical-align: top;
+    line-height: 20px;
+    font-size: 15px;
+    letter-spacing: -.15px;
+	font-weight: 700;
+}
+
+.myAddress_info .mark {
+	display: inline-block;
+    vertical-align: top;
+    line-height: 14px;
+    margin-top: 0;
+    margin-left: 4px;
+    padding: 3px 6px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.myAddress_info .phone {
+	padding-top: 5px;
+}
+
+.myAddress_info .address_box {
+	padding-top: 5px;
+}
+
+.btn_bind {
+	/* padding-left: 11px;
+    padding-right: 12px;
+    margin: 10px auto; */
+}
+
+.btn {
+	display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding-top: 1px;
+    padding-left: 14px;
+    padding-right: 12px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    height: 34px;
+    line-height: 32px;
+}
+
+.btn.default_btn {
+    right: 12%;
+    bottom: 15px;
+}
+
+.btn.modify_btn {
+    right: 6%;
+    bottom: 15px;
+}
+
+.btn.delete_btn {
+    right: 0;
+    bottom: 15px;
+}
+
+/* 모달 */
+
+.layer_container {
+	overflow: hidden;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.layer_header {
+	text-align: center;
+}
+
+.layer_header title {
+	line-height: 22px;
+    font-size: 18px;
+    letter-spacing: -.27px;
+    font-weight: 700;
+    letter-spacing: -.15px;
+    color: #000;
+    text-align: center;
+    background-color: #fff;
+}
+
+.delivery_bind {
+	padding: 0 32px;
+}
+
+.input_box {
+	position: relative;
+    padding-bottom: 15px; 
+	margin-top: 8px;
+}
+
+.input_title {
+	font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    margin: 0;
+}
+
+.input_txt {
+	padding: 15px 0 10px;
+	width: 100%;
+    font-size: 14px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.input_txt:focus {
+	outline: 0;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
+}
+
+.input_err {
+	display: none;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+    margin: 3px;
+}
+
+.checkbox_item {
+	align-items: center;
+	font-size: 14px;
+}
+
+label {
+	display: inline-block;
+}
+
+.check_label {
+	display: inline-flex;
+    max-width: 100%;
+}
+
+.label_txt {
+	padding-left: 8px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    vertical-align: top;
+}
+
+#input_zipcode {
+	position: relative;
+}
+
+.zipcode_btn {
+    position: absolute;
+ 	bottom: auto;
+ 	right: 0;
+    width: 55px;
+    height: 34px;
+	padding-top: 1px;
+    padding-left: 14px;
+    padding-right: 12px;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    font-size: 12px;
+    letter-spacing: -.06px;
+    line-height: 32px;
+}
+
+.layer_btn {
+	text-align: center;
+    letter-spacing: -.06px;
+    line-height: 32px;
+    padding: 24px 32px 32px;
+}
+
+.cancel_btn {
+	width: 120px;
+	height: 34px;
+	display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+    color: rgba(34,34,34,.8);
+    background-color: #fff;
+}
+
+.save_btn {
+	margin-left: 8px;
+	width: 120px;
+	height: 34px;
+	display: inline-block;
+	background-color: #ebebeb;
+    color: #fff;
+    cursor: default;
+	
+}
+
+.save_btn_able {
+	background-color: #222222;
+    cursor: pointer;
+}
+
+.layer_close_btn {
+	position: absolute;
+    top: 18px;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:hover {
+    border-color: rgba(170, 170, 170, 0.5);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+.myAddress{
+    margin: 0 40px;
+}
+
+.name_box{
+	display: flex;
+    justify-content: space-between;
+}

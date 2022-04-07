@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="checkSQL">
+
+	<!-- 전체 목록 -->
+	<select id="getCheckForm" parameterType="java.util.Map" resultType="check">
+  SELECT * FROM
+        (SELECT ROWNUM rn, tt.* FROM 
+                (SELECT  c1.checkId, p1.productName,  c1.checkState, c1.checkResult, c1.salesId
+                          
+                      from check_table c1, 
+                           product_table p1    
+                       
+               
+                      where 
+                         c1.productId = p1.productId
+                        order by checkId DESC)tt)
+  		  WHERE rn BETWEEN #{startNum} AND #{endNum}
+    
+    
+	</select>
+	
+ 	<!--검색필터  -->
+ 	<select id="searchBtnForm" parameterType="java.util.Map" resultType="check">
+ 		SELECT * FROM
+          (SELECT ROWNUM rn, o.* FROM
+            
+              ( SELECT c1.checkId, p1.productName,  c1.checkState, c1.checkResult
+                  
+              from check_table c1,
+                   product_table p1    
+               
+       
+              where  c1.productId = p1.productId
+            
+                                
+              ORDER BY checkId desc)o)
+         WHERE checkState = #{searchOption1} AND checkResult = #{searchOption2}
+         
+ 	</select>
+ 	
+ 	 <!-- 상품 페이징을 위한 총 글의 수 -->
+    <select id="getTotalCheck" resultType="int">
+      select count(*) from check_table
+    </select>
+    
+    <select id="getCheckChgForm" parameterType="String" resultType="check" >
+    		SELECT * FROM check_table WHERE checkId = #{checkId}
+    
+    </select>
+    
+    	<!--검수현황 변경-->
+	<update id="situationChg" parameterType="java.util.Map">
+		UPDATE check_table SET checkState = #{chkSituationChg} WHERE checkId=#{checkId}
+	</update>
+	
+		<!--검수결과 변경-->
+	<update id="resultChg" parameterType="java.util.Map">
+		UPDATE check_table SET checkResult = #{chkResultChg} WHERE checkId=#{checkId}
+	</update>
+
+</mapper>

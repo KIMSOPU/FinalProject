@@ -1,0 +1,17 @@
+.banner_item {
+    background-color: white;  /* rgb(226, 226, 226) */
+    width: 100%;
+    /* height: 480px; */
+	text-align: center;
+  }
+  
+  .banner_item-content ul {
+    display: flex;
+
+  }
+  
+  .banner_item-list button {
+    position: absolute;
+   
+  }
+  

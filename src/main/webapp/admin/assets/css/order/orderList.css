@@ -1,0 +1,51 @@
+/* 페이징 */
+#currentPaging {
+	color: red;
+	cursor: pointer;
+}
+
+#paging {
+	color: black;	
+	cursor: pointer;
+}
+
+.pagingDiv {
+	text-align: center;
+	font-size: 13pt;
+	margin: 10px 0;
+}
+
+.pagingDiv span {
+	padding: 0 5px;
+}
+
+#searchDivText {
+	font-size: 12px;
+	color: red;
+	margin: 5px 0;
+    text-align:center;
+}
+#searchDiv {
+    width: 400px;
+    margin: auto;
+}
+
+#searchOption {
+    width: 30%;
+    margin-right: 10px;
+    border: 1px;
+    outline: 0;
+    background-color: rgba(222, 222, 222, 0.3);
+}
+
+.input-group-text {
+	cursor: pointer;
+}
+
+.dataTr{
+	cursor: pointer;
+}
+
+.dataTr:hover{
+	background-color:#f1f1f1;
+}

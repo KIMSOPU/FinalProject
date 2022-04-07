@@ -1,0 +1,200 @@
+@charset "UTF-8";
+p {
+    display: block;
+    margin: 0;
+}
+
+input, textarea {
+	padding: 0;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+}
+
+ul, il {
+	list-style: none;
+	margin: 0;
+    padding: 0;
+}
+
+button {
+	border: 0;
+	outline: none;
+  	box-shadow: none;
+  	background-color: transparent;
+  	cursor: pointer;
+}
+
+.myAccount {
+	overflow: hidden;
+    min-height: 380px; 
+}
+
+.content_area {
+	max-width: 480px;
+}
+
+.registered_account_box {
+	overflow: hidden;
+    margin-top: 21px;
+    padding: 15px 15px 16px;
+    border-radius: 10px;
+    background-color: #fafafa;
+    border: 1px solid #ebebeb;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.box_title {
+	line-height: 14px;
+	margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 12px;
+    letter-spacing: -.06px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+.registered_account_box .box_account_info {
+	margin: 0;
+	line-height: 22px;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    letter-spacing: -1px;
+}
+
+.account_registeration {
+	padding-top: 20px;
+}
+
+.input_title {
+	font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    margin: 0;
+}
+
+.input_txt {
+	padding: 15px 0 10px;
+	width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.input_txt:focus {
+	outline: 0;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
+}
+
+.account_registeration .input_txt {
+    padding: 15px 0 10px;
+    cursor: pointer;
+}
+
+
+.input_box {
+	position: relative;
+    padding-bottom: 15px; 
+	margin-top: 8px;
+}
+
+.input_err {
+	display: none;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+}
+
+.registeration_btn_box {
+	padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+	width: 100px;
+    height: 42px;
+    font-size: 14px;
+    letter-spacing: -.14px;
+    text-align: center;
+	line-height: 40px;
+    vertical-align: middle;
+    color: #fff;
+	background-color: #ebebeb;
+    border-radius: 10px;
+    cursor: default;
+}
+
+.btn_able {
+	cursor: pointer;
+	background-color: #222222;
+}
+
+/* 드랍다운 */
+.layer {
+ 	overflow: hidden;
+	overflow-y: auto;
+	position: fixed;
+    left: 0;
+    right: 0;
+    background-color: rgba(34,34,34,.5);
+    z-index: 1010;
+}
+
+.layer_container {
+	position: relative;
+    transform: none;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.layer_dropdown {
+	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;	
+    max-height: 240px;
+	display: none;
+	position: absolute;
+    top: auto;
+    bottom: auto;
+    border: 1px solid #ebebeb;
+}
+
+.dropdown_btn {
+	position: absolute;
+	width: 24px;
+    height: 24px;
+    top: 50px;
+    right: 0;
+    margin-top: -12px;
+    line-height: 0;
+}
+
+.dropdown_list {
+	overflow-y: auto;
+    max-height: 240px;
+}
+
+.drop_link {
+	position: relative;
+    display: block;
+    padding: 11px 50px 10px 16px;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    color: rgba(34,34,34,.8);
+}

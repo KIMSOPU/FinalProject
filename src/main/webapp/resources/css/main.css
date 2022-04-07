@@ -1,0 +1,80 @@
+@import "kream-head.css";
+
+.kream-header {
+  display: flex;
+  justify-content: space-between;
+
+  /* background-color: rgb(255, 209, 209); */
+}
+
+header {
+  font-size: 23px;
+  font-weight: 800;
+  margin: auto;
+  padding: 3vh;
+}
+
+.kream-header__link {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.kream-header__a {
+  cursor: pointer;
+  text-decoration: none;
+  padding: 1.8vh;
+  color: rgb(66, 66, 66);
+}
+
+.kream-header__a:hover {
+  color: rgb(85, 85, 85);
+}
+
+.kream-header__title {
+  font-size: 35px;
+  font-family: "Bangers", cursive;
+  font-weight: bold;
+  /* cursor: pointer; */
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #eee;
+}
+.content {
+  width: 500vh;
+  height: 500vh;
+  text-align: center;
+}
+
+allHeader {
+  position: fixed;
+  top: 0;
+  /* width: 100% */
+  left: 0;
+  right: 0;
+  background-color: white;
+
+
+  /* 생략 */
+}
+
+.content{
+  color: rgb(255, 0, 0);
+
+}
+
+.content-box {
+  display: flex;
+  flex-direction: column;
+
+ 
+
+}
+body {
+  padding-top: 150px; /* padding-top: 115px; */
+
+  /* 생략 */
+}

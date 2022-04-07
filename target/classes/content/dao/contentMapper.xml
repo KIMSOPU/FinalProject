@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="contentSQL">
+       
+    <!-- 공지사항 목록 뽑기 -->
+    <select id="getAnnounceList" parameterType="java.util.Map" resultType="announce">
+    <![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from announcement_board 
+		        order by announcementId desc)tt
+				)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+    </select>
+    
+    <!-- 공지사항 페이징을 위한 총 글의 수 -->
+    <select id="getTotalAnnounce" resultType="int">
+    	select count(*) from announcement_board  
+    </select>
+    
+    <!-- 공지사항 검색결과 목록 뽑기 -->
+    <select id="searchAnnounce" parameterType="java.util.Map" resultType="announce">
+	   	<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from announcement_board 
+		        
+		        where ${searchOption} like '%' || #{inputWord} || '%'	
+		        
+		        
+		        order by announcementId desc)tt
+				)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>	 
+	
+	<!-- 공지사항 검색 글의 총개수 -->
+	<select id="searchTotalAnnounce" parameterType="java.util.Map" resultType="int">
+		select count(*) from announcement_board where ${searchOption} like '%' || #{inputWord} || '%'	
+	</select>
+	
+    <!-- 공지사항 등록 -->
+    <insert parameterType="announce" id="writeAnnounce">
+    	insert into announcement_board VALUES (seq_announcement_board.nextval, #{title}, #{contents}, default, sysdate)
+    </insert>
+    
+    <!-- 공지사항 삭제 -->
+    <delete id="deleteAnnounce" parameterType="int">
+    	delete from announcement_board where announcementId = #{announcementId}
+    </delete>
+    
+    <!-- 수정 시 기본글의 정보 -->
+    <select id="getUpdateView" parameterType="int" resultType="announce">
+    	select * from announcement_board where announcementId = #{announcementId}
+    </select>
+    
+    <!-- 공지사항 수정 -->
+    <update id="updateAnnounce" parameterType="announce">
+    	update announcement_board set title=#{title}, contents=#{contents} where announcementId = #{announcementId}
+    </update>
+ </mapper>
+
+ 
+ 
